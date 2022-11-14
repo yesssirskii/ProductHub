@@ -1,0 +1,20 @@
+<p-dialog header="Edit product" [(visible)]="displayModal" [modal]="true" [style]="{width: '15vw'}" [draggable]="false" [resizable]="false">
+    <div class="field">
+        <label> Name </label><br>
+        <input pInputText [ngModel] = "Name" placeholder = "{{ products.Name }}"/>
+    </div>
+    <div class="field">
+        <label> Price </label><br>
+        <input pInputText [ngModel] = "Price" placeholder = "{{ products.Price }}"/>
+    </div>
+    <div class="field">
+        <label> Country of Origin </label><br>
+        <input pInputText [ngModel] = "Country" placeholder = "{{ products.Country }}"/>
+    </div>
+    <ng-template pTemplate = "footer">
+        <button pButton pRipple type="button" label="Update" class="p-button-raised" (click) = "editProducts(products.productId)"></button>
+    </ng-template>
+</p-dialog>
+<div class = "editProductButton">
+    <button pButton (click) = "showEditModal()"><i class="pi pi-wrench"></i></button>
+</div>

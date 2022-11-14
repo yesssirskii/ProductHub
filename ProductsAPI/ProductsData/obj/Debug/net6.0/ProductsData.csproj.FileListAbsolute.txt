@@ -1,0 +1,14 @@
+C:\Users\ivanm\Documents\GDi\Workshop\Workshop_task\ProductsAPI\ProductsData\bin\Debug\net6.0\ProductsData.deps.json
+C:\Users\ivanm\Documents\GDi\Workshop\Workshop_task\ProductsAPI\ProductsData\bin\Debug\net6.0\ProductsData.runtimeconfig.json
+C:\Users\ivanm\Documents\GDi\Workshop\Workshop_task\ProductsAPI\ProductsData\bin\Debug\net6.0\ProductsData.dll
+C:\Users\ivanm\Documents\GDi\Workshop\Workshop_task\ProductsAPI\ProductsData\bin\Debug\net6.0\ProductsData.pdb
+C:\Users\ivanm\Documents\GDi\Workshop\Workshop_task\ProductsAPI\ProductsData\obj\Debug\net6.0\ProductsData.csproj.AssemblyReference.cache
+C:\Users\ivanm\Documents\GDi\Workshop\Workshop_task\ProductsAPI\ProductsData\obj\Debug\net6.0\ProductsData.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ivanm\Documents\GDi\Workshop\Workshop_task\ProductsAPI\ProductsData\obj\Debug\net6.0\ProductsData.AssemblyInfoInputs.cache
+C:\Users\ivanm\Documents\GDi\Workshop\Workshop_task\ProductsAPI\ProductsData\obj\Debug\net6.0\ProductsData.AssemblyInfo.cs
+C:\Users\ivanm\Documents\GDi\Workshop\Workshop_task\ProductsAPI\ProductsData\obj\Debug\net6.0\ProductsData.csproj.CoreCompileInputs.cache
+C:\Users\ivanm\Documents\GDi\Workshop\Workshop_task\ProductsAPI\ProductsData\obj\Debug\net6.0\ProductsData.dll
+C:\Users\ivanm\Documents\GDi\Workshop\Workshop_task\ProductsAPI\ProductsData\obj\Debug\net6.0\refint\ProductsData.dll
+C:\Users\ivanm\Documents\GDi\Workshop\Workshop_task\ProductsAPI\ProductsData\obj\Debug\net6.0\ProductsData.pdb
+C:\Users\ivanm\Documents\GDi\Workshop\Workshop_task\ProductsAPI\ProductsData\obj\Debug\net6.0\ProductsData.genruntimeconfig.cache
+C:\Users\ivanm\Documents\GDi\Workshop\Workshop_task\ProductsAPI\ProductsData\obj\Debug\net6.0\ref\ProductsData.dll
