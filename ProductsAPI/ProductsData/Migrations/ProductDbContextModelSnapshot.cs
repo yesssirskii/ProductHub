@@ -17,125 +17,125 @@ namespace ProductsData.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.10")
+                .HasAnnotation("ProductVersion", "7.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("ProductsData.Entities.Product", b =>
                 {
-                    b.Property<int>("ProductId")
+                    b.Property<int>("productId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("productId"));
 
-                    b.Property<string>("Country")
+                    b.Property<string>("country")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Price")
+                    b.Property<int>("price")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProductTypeId")
+                    b.Property<int?>("productTypeid")
                         .HasColumnType("int");
 
-                    b.HasKey("ProductId");
+                    b.HasKey("productId");
 
-                    b.HasIndex("ProductTypeId");
+                    b.HasIndex("productTypeid");
 
                     b.ToTable("Products");
 
                     b.HasData(
                         new
                         {
-                            ProductId = 1,
-                            Country = "COLOMBIA",
-                            Name = "Spoon",
-                            Price = 32
+                            productId = 1,
+                            country = "COLOMBIA",
+                            name = "Spoon",
+                            price = 32
                         },
                         new
                         {
-                            ProductId = 2,
-                            Country = "CROATIA",
-                            Name = "Bycicle",
-                            Price = 569
+                            productId = 2,
+                            country = "CROATIA",
+                            name = "Bycicle",
+                            price = 569
                         },
                         new
                         {
-                            ProductId = 3,
-                            Country = "ITALY",
-                            Name = "Necklace",
-                            Price = 1600
+                            productId = 3,
+                            country = "ITALY",
+                            name = "Necklace",
+                            price = 1600
                         },
                         new
                         {
-                            ProductId = 4,
-                            Country = "FRANCE",
-                            Name = "Water",
-                            Price = 5
+                            productId = 4,
+                            country = "FRANCE",
+                            name = "Water",
+                            price = 5
                         },
                         new
                         {
-                            ProductId = 5,
-                            Country = "ITALY",
-                            Name = "Chair",
-                            Price = 260
+                            productId = 5,
+                            country = "ITALY",
+                            name = "Chair",
+                            price = 260
                         });
                 });
 
             modelBuilder.Entity("ProductsData.Entities.ProductType", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
-                    b.Property<string>("Type")
+                    b.Property<string>("type")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("id");
 
                     b.ToTable("ProductTypes");
 
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            Type = "Kitchen Utensils"
+                            id = 1,
+                            type = "Kitchen Utensils"
                         },
                         new
                         {
-                            Id = 2,
-                            Type = "Transportation"
+                            id = 2,
+                            type = "Transportation"
                         },
                         new
                         {
-                            Id = 3,
-                            Type = "Jewlery"
+                            id = 3,
+                            type = "Jewlery"
                         },
                         new
                         {
-                            Id = 4,
-                            Type = "Consumables"
+                            id = 4,
+                            type = "Consumables"
                         },
                         new
                         {
-                            Id = 5,
-                            Type = "Furniture"
+                            id = 5,
+                            type = "Furniture"
                         });
                 });
 
             modelBuilder.Entity("ProductsData.Entities.Product", b =>
                 {
-                    b.HasOne("ProductsData.Entities.ProductType", "ProductType")
+                    b.HasOne("ProductsData.Entities.ProductType", "productType")
                         .WithMany()
-                        .HasForeignKey("ProductTypeId");
+                        .HasForeignKey("productTypeid");
 
-                    b.Navigation("ProductType");
+                    b.Navigation("productType");
                 });
 #pragma warning restore 612, 618
         }

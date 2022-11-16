@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Product } from '../Models/product';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,21 +11,26 @@ export class ProductService {
   
   constructor(private http: HttpClient) { }
 
-  private apiUrl = 'https://localhost:7213/';
+  // Declaring variable 'api' which grabs the 'apiUrl' variable from the 'environment.ts' file:
+  api = environment.apiUrl;
 
-  public getProducts(): Observable<Product[]>{
-    return this.http.get<Product[]>(this.apiUrl + 'GetProducts');
+  // GET method:
+  public getProducts(): Observable<any>{
+    return this.http.get<any>(this.api + 'getProducts');
   }
 
-  public AddProducts(val: any){
-    return this.http.post<Product[]>(this.apiUrl + 'AddProducts', val)
+  // POST method:
+  public addProducts(val: any){
+    return this.http.post(this.api + 'addProducts', val)
   }
 
-  public EditProducts(val: any){
-    return this.http.put<Product[]>(this.apiUrl + '/Editproducts?id=', val)
+  // PUT method:
+  public editProducts(val: any){
+    return this.http.put(this.api + 'editproducts?id=', val)
   }
 
-  public DeleteProducts(val: any){
-    return this.http.delete<Product[]>(this.apiUrl + 'DeleteProducts?id=' + val)
+  // DELETE method:
+  public deleteProducts(val: any){
+    return this.http.delete(this.api + 'deleteProducts?id=' + val)
   }
 }

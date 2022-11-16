@@ -12,10 +12,10 @@ namespace ProductsData.Entities
   public class Product
   {
     [Key]
-    public int ProductId { get; set; }
-    public string? Name { get; set; }  
-    public int Price { get; set; }
-    public string? Country { get; set; }
-    public ProductType? ProductType { get; set; }
+    public int productId { get; set; }
+    public string? name { get; set; }  
+    public int price { get; set; }
+    public string? country { get; set; }
+    public ProductType? productType { get; set; }
   }
 }
