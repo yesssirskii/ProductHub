@@ -1,4 +1,5 @@
 <!-- ADD products modal-->
+<!-- ADD products modal-->
 <p-dialog header="Add product" [(visible)]="displayModal" [modal]="true" [style]="{width: '15vw'}" [draggable]="false" [resizable]="false">
     <div class = "addproductForm">   
         <div class="field">
@@ -20,20 +21,20 @@
     <button pButton pRipple type="button" label="Add product" class="p-button-raised" (click) = "showAddModal()"></button>
 </div>
 
-<!-- EDIT products modal-->
+<!-- EDIT products modal
 
 <p-dialog header="Edit product" [(visible)]="displayModal" [modal]="true" [style]="{width: '15vw'}" [draggable]="false" [resizable]="false">
     <div class="field">
         <label> Name </label><br>
-        <input pInputText [ngModel] = "name" placeholder = "{{ products.Name }}"/>
+        <input pInputText [ngModel] = "name"/>
     </div>
     <div class="field">
         <label> Price </label><br>
-        <input pInputText [ngModel] = "price" placeholder = "{{ products.Price }}"/>
+        <input pInputText [ngModel] = "price"/>
     </div>
     <div class="field">
         <label> Country of Origin </label><br>
-        <input pInputText [ngModel] = "country" placeholder = "{{ products.country }}"/>
+        <input pInputText [ngModel] = "country"/>
     </div>
     <ng-template pTemplate = "footer">
         <button pButton pRipple type="button" label="Update" class="p-button-raised" (click) = "editProducts(products.productId)"></button>
@@ -41,4 +42,4 @@
 </p-dialog>
 <div class = "editProductButton">
     <button pButton (click) = "showEditModal()"><i class="pi pi-wrench"></i></button>
-</div>
+</div>-->

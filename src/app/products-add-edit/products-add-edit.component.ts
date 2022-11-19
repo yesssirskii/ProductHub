@@ -24,6 +24,7 @@ export class ProductsAddEditComponent implements OnInit {
     this.price = this.products.price;
     this.country = this.products.country;
     this.productTypeId =  this.products.productTypeId;
+    console.log(this.products);
   }
 
   addProducts(){
@@ -31,7 +32,6 @@ export class ProductsAddEditComponent implements OnInit {
     this.service.addProducts(val).subscribe(response => {
       this.products.val = response;
       alert("Product added.");
-      this.products.getProducts();
     })
   }
 
@@ -39,10 +39,9 @@ export class ProductsAddEditComponent implements OnInit {
     this.service.editProducts(val).subscribe(response => {
       this.products = response;
       alert("Product updated successfully.");
-      window.location.reload();
+      this.service.getProducts();
     })
   }
-
 
   displayModal: boolean;
   showAddModal() {

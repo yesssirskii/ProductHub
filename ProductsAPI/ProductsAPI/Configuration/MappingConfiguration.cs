@@ -11,6 +11,7 @@ namespace ProductsAPI.Configuration
     {
       // Defining a profile to convert from Product to productDTO:
       CreateMap<Product, ProductDTO>();
+      CreateMap<ProductDTO, Product>();
     }
   }
 }

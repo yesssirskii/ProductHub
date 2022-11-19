@@ -9,65 +9,54 @@ using ProductsAPI.Repositories;
 using ProductsData.Entities;
 using ProductsData.Models;
 
+
 namespace ProductsAPI.Services
 {
-  public class ProductService
+  public class ProductService: ControllerBase
   {
     // Injecting the product repository and the ProductDTO class into the product service:
     private readonly IProductRepository _repository;
     private readonly IMapper _mapper;
     private readonly ProductDbContext _context;
 
-    public ProductService(IProductRepository repository, IMapper mapper)
+    public ProductService(IProductRepository repository, IMapper mapper, ProductDbContext context)
     {
       _repository = repository;
       _mapper = mapper;
+      _context = context;
     }
 
-    // Method which returns IEnumerable<ProductDTO>:
-    [HttpGet]
-    public List<ProductDTO> Get()
+    // GET method:
+    public ActionResult<List<Product>> getProducts()
     {
-      var products = _repository.getProducts().ToList();
-      return _mapper.Map<List<ProductDTO>>(products);
+      return Ok(_context.Products.Select(product => _mapper.Map<ProductDTO>(product)));
     }
 
     // POST method:
-    [HttpPost]
-    public Product Add(Product product)
+    public ActionResult<List<Product>> addProduct(ProductDTO newProduct)
     {
+      var product = _mapper.Map<Product>(newProduct);
       _context.Products.Add(product);
-      bool isSaved = _context.SaveChanges() > 0;
-      if (isSaved)
-      {
-        return product;
-      }
-      return null;
+
+      return Ok(_context.Products.Select(product => _mapper.Map<ProductDTO>(product)));
     }
 
     // PUT method:
-    [HttpPut]
-
-    public void Edit(int id, [FromBody] Product product)
+    public ActionResult<List<Product>> updateProduct(int id, ProductDTO productDto)
     {
-      var productDetail = _context.Products.FirstOrDefault(x => x.productId == id);
-      if (productDetail != null)
-      {
-        productDetail.name = product.name;
-        productDetail.price = product.price;
-        productDetail.country = product.country;
+      var product = _repository.getProductById(id);
+      _mapper.Map(productDto, product);
 
-        _context.SaveChanges();
-      }
+      return Ok(_mapper.Map<ProductDTO>(product));
     }
 
     // DELETE method:
-    [HttpDelete]
-    public void Delete(int id)
+    public ActionResult<List<Product>> deleteProduct(int id)
     {
-      _context.Products.Remove(_context.Products.FirstOrDefault(e => e.productId == id));
-      _context.SaveChanges();
-    }
+      var product = _repository.getProductById(id);
+      _context.Products.Remove(product);
 
+      return Ok(_context.Products.Select(product => _mapper.Map<ProductDTO>(product)));
+    }
   }
 }

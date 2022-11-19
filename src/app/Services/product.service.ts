@@ -15,7 +15,7 @@ export class ProductService {
   api = environment.apiUrl;
 
   // GET method:
-  public getProducts(): Observable<any>{
+  public getProducts(): Observable<any[]>{
     return this.http.get<any>(this.api + 'getProducts');
   }
 

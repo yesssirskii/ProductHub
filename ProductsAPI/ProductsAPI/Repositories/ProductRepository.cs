@@ -20,5 +20,11 @@ namespace ProductsAPI.Repositories
     {
       return _productDbContext.Products;
     }
+
+    public Product getProductById(int id)
+    {
+      var product = _productDbContext.Products.FirstOrDefault(u => u.productId == id);
+      return product;
+    }
   }
 }
