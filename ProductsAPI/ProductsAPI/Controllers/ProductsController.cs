@@ -16,37 +16,35 @@ namespace ProductsAPI.Controllers
   public class ProductsController : Controller
   {
     private readonly ProductService _productService;
-    private readonly ProductDbContext _context;
-    private readonly IProductRepository _repository;
-    private readonly IMapper _mapper; 
 
-    // Injecting the service into the controller:
+    // Injecting the service into the controller using DI:
     public ProductsController(ProductService productService, ProductDbContext context, IProductRepository repository, IMapper mapper) //constructor
     {
       _productService = productService;
-      _context = context;
-      _repository = repository;
-      _mapper = mapper;
     }
 
+    // GET products method:
     [HttpGet("getProducts")]
     public IActionResult Get()
     {
       return Ok(_productService.getProducts());
     }
 
+    // POST product method:
     [HttpPost("addProduct")]
     public ActionResult<List<ProductDTO>> Add(ProductDTO newProduct)
     {
       return Ok(_productService.addProduct(newProduct));
     }
 
+    // PUT product method:
     [HttpPut("updateProduct")]
     public IActionResult Update(int id, ProductDTO updatedProduct)
     {
       return Ok(_productService.updateProduct(id, updatedProduct));
     }
 
+    // DELETE product method:
     [HttpDelete("deleteProduct")]
     public ActionResult<List<Product>> Delete(int id)
     {
