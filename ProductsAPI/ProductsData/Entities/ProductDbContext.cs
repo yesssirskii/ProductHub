@@ -15,8 +15,6 @@ namespace ProductsData.Entities
 
     // Creating a constructor and making it inherit the base properties using the base() syntax:
     public ProductDbContext(DbContextOptions<ProductDbContext> options) : base(options) { }
-
-    // Defining relationships between database entities:
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
 

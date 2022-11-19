@@ -8,7 +8,6 @@ using ProductsAPI.Repositories;
 using ProductsAPI.Services;
 using ProductsData.Entities;
 using ProductsData.Models;
-using System.Data.Entity;
 using System.Security.Permissions;
 
 namespace ProductsAPI.Controllers
@@ -16,39 +15,86 @@ namespace ProductsAPI.Controllers
   public class ProductsController : Controller
   {
     private readonly ProductService _productService;
+    private readonly ProductDbContext _context;
 
     // Injecting the service into the controller using DI:
-    public ProductsController(ProductService productService, ProductDbContext context, IProductRepository repository, IMapper mapper) //constructor
+    public ProductsController(ProductService productService, ProductDbContext context, IProductRepository repository) //constructor
     {
       _productService = productService;
+      _context = context;
     }
 
-    // GET products method:
     [HttpGet("getProducts")]
-    public IActionResult Get()
+    public async Task<ActionResult<List<Product>>> getProducts()
     {
-      return Ok(_productService.getProducts());
+      return Ok(await _context.Products.ToListAsync());
     }
 
-    // POST product method:
     [HttpPost("addProduct")]
-    public ActionResult<List<ProductDTO>> Add(ProductDTO newProduct)
+    public async Task<ActionResult<List<Product>>> addProduct(Product product)
     {
-      return Ok(_productService.addProduct(newProduct));
+      _context.Products.Add(product);
+      await _context.SaveChangesAsync();
+
+      return Ok(await _context.Products.ToListAsync());
     }
 
-    // PUT product method:
     [HttpPut("updateProduct")]
-    public IActionResult Update(int id, ProductDTO updatedProduct)
+    public async Task<ActionResult<List<Product>>> updateProduct(Product product)
     {
-      return Ok(_productService.updateProduct(id, updatedProduct));
+      var dbProduct = await _context.Products.FindAsync(product.productId);
+      if (dbProduct == null)
+        return BadRequest("Product not found.");
+
+      dbProduct.name = product.name;
+      dbProduct.price = product.price;
+      dbProduct.country = product.country;
+
+      await _context.SaveChangesAsync();
+
+      return Ok(await _context.Products.ToListAsync());
     }
 
-    // DELETE product method:
     [HttpDelete("deleteProduct")]
-    public ActionResult<List<Product>> Delete(int id)
+    public async Task<ActionResult<List<Product>>> deleteProduct(int id)
     {
-      return Ok(_productService.deleteProduct(id));
+      var dbProduct = await _context.Products.FindAsync(id);
+      if (dbProduct == null)
+        return BadRequest("Product not found.");
+
+      _context.Products.Remove(dbProduct);
+      await _context.SaveChangesAsync();
+
+      return Ok(await _context.Products.ToListAsync());
     }
   }
+
+  /*
+  // GET products method:
+  [HttpGet("getProducts")]
+  public IActionResult Get()
+  {
+    return Ok(_productService.getProducts());
+  }
+
+  // POST product method:
+  [HttpPost("addProduct")]
+  public ActionResult<List<Product>> Add(Product newProduct)
+  {
+    return Ok(_productService.createProduct(newProduct));
+  }
+
+  // PUT product method:
+  [HttpPut("updateProduct")]
+  public IActionResult Update(Product updatedProduct)
+  {
+    return Ok(_productService.updateProduct(updatedProduct));
+  }
+
+  // DELETE product method:
+  [HttpDelete("deleteProduct")]
+  public ActionResult<List<Product>> Delete(int id)
+  {
+    return Ok(_productService.deleteProduct(id));
+  }*/
 }

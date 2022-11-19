@@ -13,8 +13,7 @@ import { DialogModule } from 'primeng/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ProductsAddEditComponent } from './products-add-edit/products-add-edit.component';
-
+import { ProductsAddEditComponent } from './Components/products-add-edit/products-add-edit.component';
 
 @NgModule({
   declarations: [

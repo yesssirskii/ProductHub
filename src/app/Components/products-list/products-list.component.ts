@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../Services/product.service';
+import { Product } from 'src/app/Models/product';
 
 @Component({
   selector: 'app-products-list',
@@ -10,24 +11,36 @@ export class ProductsListComponent implements OnInit {
 
   constructor(private service: ProductService) {}
 
-  products: any;
+  products: Product[] = [];
+  productToEdit?: Product; 
 
   ngOnInit(): void {
    this.getProducts();
   }
 
   getProducts(){
-    this.service.getProducts().subscribe(response => {
-      this.products = response;
-      console.log(this.products);
-    });
+    this.service.getProducts().subscribe((response: Product[]) =>
+      (this.products = response));
   }
 
-  deleteProducts(val: any){
+  deleteProduct(val: any){
     if(confirm("Are you sure?")){
-      this.service.deleteProducts(val).subscribe(response => {
+      this.service.deleteProduct(val).subscribe(response => {
         this.getProducts(); 
       })
     }
+  }
+
+  updateProductList(products: Product[]){
+    this.products = products;
+  }
+
+  // Funtcion to initialize new product:
+  initNewProduct(){
+    this.productToEdit = new Product();
+  }
+
+  updateProduct(product: Product){
+    this.productToEdit = product;
   }
 }
