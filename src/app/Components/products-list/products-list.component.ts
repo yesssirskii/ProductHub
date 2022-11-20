@@ -23,9 +23,9 @@ export class ProductsListComponent implements OnInit {
       (this.products = response));
   }
 
-  deleteProduct(val: any){
+  deleteProduct(id: any){
     if(confirm("Are you sure?")){
-      this.service.deleteProduct(val).subscribe(response => {
+      this.service.deleteProduct(id).subscribe(response => {
         this.getProducts(); 
       })
     }

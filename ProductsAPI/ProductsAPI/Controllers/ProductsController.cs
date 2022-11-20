@@ -58,11 +58,8 @@ namespace ProductsAPI.Controllers
     [HttpDelete("deleteProduct")]
     public async Task<ActionResult<List<Product>>> deleteProduct(int id)
     {
-      var dbProduct = await _context.Products.FindAsync(id);
-      if (dbProduct == null)
-        return BadRequest("Product not found.");
 
-      _context.Products.Remove(dbProduct);
+      _context.Products.Remove(_context.Products.FirstOrDefault(a => a.productId == id));
       await _context.SaveChangesAsync();
 
       return Ok(await _context.Products.ToListAsync());

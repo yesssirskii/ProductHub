@@ -18,27 +18,21 @@ export class ProductService {
 
   // GET method:
   public getProducts(): Observable<Product[]>{
-    return this.http.get<Product[]>(`${this.api}/${this.url}`);
+    return this.http.get<Product[]>(this.api + 'getProducts');
   }
 
   // POST method:
   public addProduct(product: Product): Observable<Product[]>{
-    return this.http.post<Product[]>(
-      `${this.api}/${this.url}`,product
-      );
+    return this.http.post<Product[]>(this.api + 'addProduct/', product);
   }
 
   // PUT method:
   public updateProduct(product: Product): Observable<Product[]>{
-    return this.http.put<Product[]>(
-      `${this.api}/${this.url}`,product
-      );
+    return this.http.put<Product[]>(this.api + 'updateProduct/' , product);
   }
 
   // DELETE method:
-  public deleteProduct(product: Product): Observable<Product[]>{
-    return this.http.delete<Product[]>(
-      `${this.api}/${this.url}/${product.id}`
-      );
+  public deleteProduct(id: any){
+    return this.http.delete<Product[]>(this.api + 'deleteProduct?id=' + id);
   }
 }

@@ -23,46 +23,6 @@ namespace ProductsAPI.Services
       _repository = repository;
       _context = context;
     }
-
-    public async Task<ActionResult<List<Product>>> getProducts()
-    {
-      return Ok(await _context.Products.ToListAsync());
-    }
-
-    public async Task<ActionResult<List<Product>>> addProduct(Product product)
-    {
-      _context.Products.Add(product);
-      await _context.SaveChangesAsync();
-
-      return Ok(await _context.Products.ToListAsync());
-    }
-
-    public async Task<ActionResult<List<Product>>> updateProduct(Product product)
-    {
-      var dbProduct = await _context.Products.FindAsync(product.productId);
-      if (dbProduct == null)
-        return BadRequest("Product not found.");
-
-      dbProduct.name = product.name;
-      dbProduct.price = product.price;
-      dbProduct.country = product.country;
-
-      await _context.SaveChangesAsync();
-
-      return Ok(await _context.Products.ToListAsync());
-    }
-
-    public async Task<ActionResult<List<Product>>> deleteProduct(int id)
-    {
-      var dbProduct = await _context.Products.FindAsync(id);
-      if (dbProduct == null)
-        return BadRequest("Product not found.");
-
-      _context.Products.Remove(dbProduct);
-      await _context.SaveChangesAsync();
-
-      return Ok(await _context.Products.ToListAsync());
-    }
   }
 
   /*
