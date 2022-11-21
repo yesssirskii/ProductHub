@@ -40,19 +40,34 @@ namespace ProductsAPI.Controllers
     }
 
     [HttpPut("updateProduct")]
-    public async Task<ActionResult<List<Product>>> updateProduct(Product product)
+    public async Task<ActionResult<List<Product>>> updateProduct(int id, [FromBody] Product product)
     {
-      var dbProduct = await _context.Products.FindAsync(product.productId);
+
+      var dbProduct = await _context.Products.FirstOrDefaultAsync(a => a.productId == id);
+      if(dbProduct != null)
+      {
+        dbProduct.name= product.name;
+        dbProduct.price= product.price;
+        dbProduct.country= product.country;
+        dbProduct.productType= product.productType;
+
+        await _context.SaveChangesAsync();
+        return Ok(dbProduct);
+      }
+
+      return NotFound("Product not found.");
+      /*var dbProduct = await _context.Products.FindAsync(product.productId);
       if (dbProduct == null)
         return BadRequest("Product not found.");
 
       dbProduct.name = product.name;
       dbProduct.price = product.price;
       dbProduct.country = product.country;
+      dbProduct.productType = product.productType;
 
       await _context.SaveChangesAsync();
 
-      return Ok(await _context.Products.ToListAsync());
+      return Ok(await _context.Products.ToListAsync());*/
     }
 
     [HttpDelete("deleteProduct")]
