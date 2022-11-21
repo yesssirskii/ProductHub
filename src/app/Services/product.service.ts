@@ -16,7 +16,7 @@ export class ProductService {
   // Declaring variable 'api' which grabs the 'apiUrl' variable from the 'environment.ts' file:
   private api = environment.apiUrl;
   private url = 'api/Products';
-  private putUrl = 'api/Products/';
+  private putDeleteURL = this.api +'api/Products/';
 
   // GET method:
   public getProducts(): Observable<Product[]>{
@@ -29,12 +29,12 @@ export class ProductService {
   }
 
   // PUT method:
-  public updateProduct(product: Product, id: any): Observable<Product[]>{
-    return this.http.put<Product[]>(this.api + this.putUrl + id, product);
+  public updateProduct(product: Product): Observable<Product[]>{
+    return this.http.put<Product[]>(this.putDeleteURL, product);
   }
 
   // DELETE method:
   public deleteProduct(id: any){
-    return this.http.delete<Product[]>(this.api + this.putUrl + id);
+    return this.http.delete<Product[]>(this.putDeleteURL + id);
   }
 }

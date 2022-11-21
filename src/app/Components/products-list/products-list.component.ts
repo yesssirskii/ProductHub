@@ -40,7 +40,7 @@ export class ProductsListComponent implements OnInit {
     this.productToEdit = new Product();
   }
 
-  updateProduct(product: Product){
+  initUpdatedProduct(product: Product){
     this.productToEdit = product;
   }
 }

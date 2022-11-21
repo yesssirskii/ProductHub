@@ -22,8 +22,8 @@ export class ProductsAddEditComponent implements OnInit {
     this.service.addProduct(product).subscribe((products: Product[]) => this.updatedProduct.emit(products));
   }
 
-  updateProduct(product: Product, id: any){
-    this.service.updateProduct(product, id).subscribe((products: Product[]) => this.updatedProduct.emit(products));
+  updateProduct(product: Product){
+    this.service.updateProduct(product).subscribe((products: Product[]) => this.updatedProduct.emit(products));
   }
 
   displayModal: boolean;
