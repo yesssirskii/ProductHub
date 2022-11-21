@@ -12,12 +12,8 @@
             <label>Country</label><br>
             <input pInputText [(ngModel)] = "product.country" placeholder = "Enter here..."/>
         </div>
-        <div>
-            <label>Product Type</label><br>
-            <input pInputText [(ngModel)] = "product.type" placeholder = "Enter here..."/>
-        </div>
-        <button pButton (click)="createProduct(product)" *ngIf="product.id">Add</button>
-        <button pButton (click)="updateProduct(product)" *ngIf="!product.id">Update</button>
+        <button pButton type = "button" (click)="createProduct(product)" *ngIf="!product.id">Add</button>
+        <button pButton type = "button" (click)="updateProduct(product, product.id)" *ngIf="!product.id">Update</button>
     </div>
 </p-dialog>
 <button pButton pRipple type="button" label="Create product" class="p-button-raised" (click) = "showModal()"></button>

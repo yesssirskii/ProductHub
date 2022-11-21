@@ -14,21 +14,18 @@ export class ProductsAddEditComponent implements OnInit {
 
   productToEdit?: Product;
 
-  constructor(private service: ProductService) { }
+  constructor(private service: ProductService) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
   
   createProduct(product: Product){
     this.service.addProduct(product).subscribe((products: Product[]) => this.updatedProduct.emit(products));
   }
 
-  updateProduct(id: any){
-    this.service.updateProduct(id).subscribe((products: Product[]) => this.updatedProduct.emit(products));
+  updateProduct(product: Product, id: any){
+    this.service.updateProduct(product, id).subscribe((products: Product[]) => this.updatedProduct.emit(products));
   }
 
   displayModal: boolean;
-  showModal() {
-    this.displayModal = true;
-  }
+  showModal() {this.displayModal = true;}
 }
