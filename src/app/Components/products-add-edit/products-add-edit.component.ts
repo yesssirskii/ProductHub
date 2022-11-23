@@ -26,6 +26,7 @@ export class ProductsAddEditComponent implements OnInit {
   updateProduct(id: number, product: Product){
     this.currentProductId = id;
     this.service.updateProduct(id, product).subscribe((products: Product[]) => this.updatedProduct.emit(products));
+    //For some reason, id is undefined.
   }
 
   displayModal: boolean;
