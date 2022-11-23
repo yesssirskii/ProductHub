@@ -29,8 +29,8 @@ export class ProductService {
   }
 
   // PUT method:
-  public updateProduct(product: Product): Observable<Product[]>{
-    return this.http.put<Product[]>(this.putDeleteURL, product);
+  public updateProduct(id: number, product: Product): Observable<Product[]>{
+    return this.http.put<Product[]>(this.putDeleteURL + id, product);
   }
 
   // DELETE method:

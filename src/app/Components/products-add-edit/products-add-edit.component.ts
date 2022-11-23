@@ -10,6 +10,7 @@ import { Product } from 'src/app/Models/product';
 export class ProductsAddEditComponent implements OnInit {
 
   @Input() product?: Product;
+  @Input() currentProductId: number;
   @Output() updatedProduct = new EventEmitter<Product[]>();
 
   productToEdit?: Product;
@@ -22,8 +23,9 @@ export class ProductsAddEditComponent implements OnInit {
     this.service.addProduct(product).subscribe((products: Product[]) => this.updatedProduct.emit(products));
   }
 
-  updateProduct(product: Product){
-    this.service.updateProduct(product).subscribe((products: Product[]) => this.updatedProduct.emit(products));
+  updateProduct(id: number, product: Product){
+    this.currentProductId = id;
+    this.service.updateProduct(id, product).subscribe((products: Product[]) => this.updatedProduct.emit(products));
   }
 
   displayModal: boolean;

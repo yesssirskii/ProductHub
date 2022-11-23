@@ -1,7 +1,7 @@
 export class Product {
-    id? : number;
+    id: number;
     name = "";
-    price?: number;
+    price: number;
     country = "";
     type = "";
 }

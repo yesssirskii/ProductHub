@@ -12,5 +12,5 @@
             <input pInputText [(ngModel)] = "product.country" placeholder = "Enter here..."/>
         </div>
         <button pButton type = "button" (click) = "createProduct(product)" *ngIf = "!product.id">Add</button>
-        <button pButton type = "button" (click) = "updateProduct(product)" *ngIf = "!product.id">Update</button>
+        <button pButton type = "button" (click) = "updateProduct(currentProductId, product)">Update</button>
     </div>
