@@ -13,7 +13,7 @@ export class ProductsListComponent implements OnInit {
 
   // Defining variables to be used in other components:
   products: Product[] = [];
-  productToEdit?: Product; 
+  productToEdit: Product; 
   currentProductId: number;
 
   ngOnInit(): void {
@@ -25,6 +25,7 @@ export class ProductsListComponent implements OnInit {
     this.service.getProducts().subscribe((response: Product[]) =>
       (this.products = response));
   }
+
     // Function to delete a product:
   deleteProduct(id: any){
     if(confirm("Are you sure?")){
@@ -39,14 +40,14 @@ export class ProductsListComponent implements OnInit {
     this.products = products;
   }
 
-  // Funtcion to initialize new product:
+  // Function to initialize a new product:
   initNewProduct(){
     this.productToEdit = new Product();
   }
   
   // Function to initialize product to update:
   initUpdatedProduct(id: number, product: Product){
-    this.productToEdit = product;
     this.currentProductId = id;
+    this.productToEdit = product;
   }
 }

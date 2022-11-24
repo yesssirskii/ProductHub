@@ -9,23 +9,23 @@ import { Product } from 'src/app/Models/product';
 })
 export class ProductsAddEditComponent implements OnInit {
 
-  @Input() product?: Product;
+  @Input() product: Product;
   @Input() currentProductId: number;
   @Output() updatedProduct = new EventEmitter<Product[]>();
 
-  productToEdit?: Product;
+  constructor(private service: ProductService) {
+    this.currentProductId = this.product?.productId;
+  }
 
-  constructor(private service: ProductService) {}
-
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.product);}
   
   createProduct(product: Product){
     this.service.addProduct(product).subscribe((products: Product[]) => this.updatedProduct.emit(products));
   }
 
-  updateProduct(id: number, product: Product){
-    this.currentProductId = id;
-    this.service.updateProduct(id, product).subscribe((products: Product[]) => this.updatedProduct.emit(products));
+  updateProduct(product: Product){
+    this.service.updateProduct(this.currentProductId, product).subscribe((products: Product[]) => this.updatedProduct.emit(products));
     //For some reason, id is undefined.
   }
 

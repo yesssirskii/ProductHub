@@ -1,4 +1,4 @@
-    <div class = "addEditProductForm" *ngIf = "product">   
+    <div *ngIf = "product">   
         <div>
             <label>Name</label><br>
             <input pInputText [(ngModel)] = "product.name" placeholder = "Enter here..."/>
@@ -11,6 +11,6 @@
             <label>Country</label><br>
             <input pInputText [(ngModel)] = "product.country" placeholder = "Enter here..."/>
         </div>
-        <button pButton type = "button" (click) = "createProduct(product)" *ngIf = "!product.id">Add</button>
-        <button pButton type = "button" (click) = "updateProduct(currentProductId, product)">Update</button>
+        <button pButton type = "button" (click) = "createProduct(product)" *ngIf = "!product.productId">Add</button>
+        <button pButton type = "button" (click) = "updateProduct(product)" *ngIf = "product.productId">Update</button>
     </div>
