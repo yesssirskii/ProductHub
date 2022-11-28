@@ -3,8 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from '../Models/product';
 import { environment } from 'src/environments/environment';
-import { identifierName } from '@angular/compiler';
-
 @Injectable({
   providedIn: 'root'
 })

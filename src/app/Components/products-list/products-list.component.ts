@@ -15,9 +15,7 @@ export class ProductsListComponent implements OnInit {
   products: Product[] = [];
   productToEdit: Product; 
   currentProductId: number;
-
   displayModal: boolean = false;
-
 
   ngOnInit(): void {
    this.getProducts();
