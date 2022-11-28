@@ -9,26 +9,27 @@ import { Product } from 'src/app/Models/product';
 })
 export class ProductsAddEditComponent implements OnInit {
 
-  @Input() product?: Product;
+  @Input() product: Product;
+  @Input() currentProductId: number;
+  @Input() displayModal: boolean;
   @Output() updatedProduct = new EventEmitter<Product[]>();
 
-  productToEdit?: Product;
-
-  constructor(private service: ProductService) { }
-
-  ngOnInit(): void {
+  constructor(private service: ProductService) {
+    this.currentProductId = this.product?.productId;
   }
+
+  ngOnInit(): void {}
   
+  // create new product
   createProduct(product: Product){
     this.service.addProduct(product).subscribe((products: Product[]) => this.updatedProduct.emit(products));
+    this. displayModal = !this.displayModal;
   }
 
-  updateProduct(id: any){
-    this.service.updateProduct(id).subscribe((products: Product[]) => this.updatedProduct.emit(products));
-  }
-
-  displayModal: boolean;
-  showModal() {
-    this.displayModal = true;
+  // update product details
+  updateProduct(product: Product){
+    this.currentProductId = product.productId; // the line which was missing to get the product ID
+    this.service.updateProduct(this.currentProductId, product).subscribe((products: Product[]) => this.updatedProduct.emit(products));
+    this.displayModal = !this.displayModal;
   }
 }

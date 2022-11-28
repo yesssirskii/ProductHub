@@ -1,4 +1,4 @@
-p-table, .addButton, h2, h1{
+p-table, p-button, h2, h1{
     display:flex;
     justify-content: center;
 }
