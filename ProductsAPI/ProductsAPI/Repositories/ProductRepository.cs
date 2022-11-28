@@ -16,15 +16,9 @@ namespace ProductsAPI.Repositories
     }
 
     // Creating a method which returns the DbSet Products from the ProductDbContext class:
-    public DbSet<Product> getProducts()
+    public DbSet<Product> GetProducts()
     {
       return _productDbContext.Products;
-    }
-
-    public Product getProductById(int id)
-    {
-      var product = _productDbContext.Products.FirstOrDefault(u => u.productId == id);
-      return product;
     }
   }
 }

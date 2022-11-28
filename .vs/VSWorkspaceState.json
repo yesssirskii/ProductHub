@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\ProductsAPI",
+    "\\ProductsAPI\\ProductsAPI",
+    "\\ProductsAPI\\ProductsAPI\\Controllers",
+    "\\ProductsAPI\\ProductsAPI\\Repositories",
+    "\\ProductsAPI\\ProductsAPI\\Services",
+    "\\ProductsAPI\\ProductsData",
+    "\\ProductsAPI\\ProductsData\\Entities",
+    "\\ProductsAPI\\ProductsData\\Models"
+  ],
+  "SelectedNode": "\\ProductsAPI\\ProductsAPI\\Controllers\\ProductsController.cs",
+  "PreviewInSolutionExplorer": false
+}

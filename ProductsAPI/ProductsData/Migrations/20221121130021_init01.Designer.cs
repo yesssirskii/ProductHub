@@ -12,17 +12,18 @@ using ProductsData.Entities;
 namespace ProductsData.Migrations
 {
     [DbContext(typeof(ProductDbContext))]
-    [Migration("20221109205823_newMigration3")]
-    partial class newMigration3
+    [Migration("20221121130021_init01")]
+    partial class init01
     {
+        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.10")
+                .HasAnnotation("ProductVersion", "7.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("ProductsData.Entities.Product", b =>
                 {
@@ -30,13 +31,10 @@ namespace ProductsData.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"));
 
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -44,12 +42,12 @@ namespace ProductsData.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProductTypeTypeId")
+                    b.Property<int?>("ProductTypeId")
                         .HasColumnType("int");
 
                     b.HasKey("ProductId");
 
-                    b.HasIndex("ProductTypeTypeId");
+                    b.HasIndex("ProductTypeId");
 
                     b.ToTable("Products");
 
@@ -58,7 +56,6 @@ namespace ProductsData.Migrations
                         {
                             ProductId = 1,
                             Country = "COLOMBIA",
-                            Id = 1,
                             Name = "Spoon",
                             Price = 32
                         },
@@ -66,7 +63,6 @@ namespace ProductsData.Migrations
                         {
                             ProductId = 2,
                             Country = "CROATIA",
-                            Id = 2,
                             Name = "Bycicle",
                             Price = 569
                         },
@@ -74,7 +70,6 @@ namespace ProductsData.Migrations
                         {
                             ProductId = 3,
                             Country = "ITALY",
-                            Id = 3,
                             Name = "Necklace",
                             Price = 1600
                         },
@@ -82,7 +77,6 @@ namespace ProductsData.Migrations
                         {
                             ProductId = 4,
                             Country = "FRANCE",
-                            Id = 4,
                             Name = "Water",
                             Price = 5
                         },
@@ -90,7 +84,6 @@ namespace ProductsData.Migrations
                         {
                             ProductId = 5,
                             Country = "ITALY",
-                            Id = 5,
                             Name = "Chair",
                             Price = 260
                         });
@@ -98,43 +91,43 @@ namespace ProductsData.Migrations
 
             modelBuilder.Entity("ProductsData.Entities.ProductType", b =>
                 {
-                    b.Property<int>("TypeId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TypeId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("TypeId");
+                    b.HasKey("Id");
 
                     b.ToTable("ProductTypes");
 
                     b.HasData(
                         new
                         {
-                            TypeId = 1,
+                            Id = 1,
                             Type = "Kitchen Utensils"
                         },
                         new
                         {
-                            TypeId = 2,
+                            Id = 2,
                             Type = "Transportation"
                         },
                         new
                         {
-                            TypeId = 3,
+                            Id = 3,
                             Type = "Jewlery"
                         },
                         new
                         {
-                            TypeId = 4,
+                            Id = 4,
                             Type = "Consumables"
                         },
                         new
                         {
-                            TypeId = 5,
+                            Id = 5,
                             Type = "Furniture"
                         });
                 });
@@ -143,7 +136,7 @@ namespace ProductsData.Migrations
                 {
                     b.HasOne("ProductsData.Entities.ProductType", "ProductType")
                         .WithMany()
-                        .HasForeignKey("ProductTypeTypeId");
+                        .HasForeignKey("ProductTypeId");
 
                     b.Navigation("ProductType");
                 });

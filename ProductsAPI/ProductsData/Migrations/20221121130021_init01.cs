@@ -5,65 +5,10 @@
 namespace ProductsData.Migrations
 {
     /// <inheritdoc />
-    public partial class nameUpdate : Migration
+    public partial class init01 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Products_ProductTypes_ProductTypeId",
-                table: "Products");
-
-            migrationBuilder.RenameColumn(
-                name: "Type",
-                table: "ProductTypes",
-                newName: "type");
-
-            migrationBuilder.RenameColumn(
-                name: "Id",
-                table: "ProductTypes",
-                newName: "id");
-
-            migrationBuilder.RenameColumn(
-                name: "ProductTypeId",
-                table: "Products",
-                newName: "productTypeid");
-
-            migrationBuilder.RenameColumn(
-                name: "Price",
-                table: "Products",
-                newName: "price");
-
-            migrationBuilder.RenameColumn(
-                name: "Name",
-                table: "Products",
-                newName: "name");
-
-            migrationBuilder.RenameColumn(
-                name: "Country",
-                table: "Products",
-                newName: "country");
-
-            migrationBuilder.RenameColumn(
-                name: "ProductId",
-                table: "Products",
-                newName: "productId");
-
-            migrationBuilder.RenameIndex(
-                name: "IX_Products_ProductTypeId",
-                table: "Products",
-                newName: "IX_Products_productTypeid");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Products_ProductTypes_productTypeid",
-                table: "Products",
-                column: "productTypeid",
-                principalTable: "ProductTypes",
-                principalColumn: "id");
-        }
-
-        /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_Products_ProductTypes_productTypeid",
@@ -115,6 +60,61 @@ namespace ProductsData.Migrations
                 column: "ProductTypeId",
                 principalTable: "ProductTypes",
                 principalColumn: "Id");
+        }
+
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Products_ProductTypes_ProductTypeId",
+                table: "Products");
+
+            migrationBuilder.RenameColumn(
+                name: "Type",
+                table: "ProductTypes",
+                newName: "type");
+
+            migrationBuilder.RenameColumn(
+                name: "Id",
+                table: "ProductTypes",
+                newName: "id");
+
+            migrationBuilder.RenameColumn(
+                name: "ProductTypeId",
+                table: "Products",
+                newName: "productTypeid");
+
+            migrationBuilder.RenameColumn(
+                name: "Price",
+                table: "Products",
+                newName: "price");
+
+            migrationBuilder.RenameColumn(
+                name: "Name",
+                table: "Products",
+                newName: "name");
+
+            migrationBuilder.RenameColumn(
+                name: "Country",
+                table: "Products",
+                newName: "country");
+
+            migrationBuilder.RenameColumn(
+                name: "ProductId",
+                table: "Products",
+                newName: "productId");
+
+            migrationBuilder.RenameIndex(
+                name: "IX_Products_ProductTypeId",
+                table: "Products",
+                newName: "IX_Products_productTypeid");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Products_ProductTypes_productTypeid",
+                table: "Products",
+                column: "productTypeid",
+                principalTable: "ProductTypes",
+                principalColumn: "id");
         }
     }
 }

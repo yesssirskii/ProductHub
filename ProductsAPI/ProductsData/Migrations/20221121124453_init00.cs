@@ -2,50 +2,53 @@
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace ProductsData.Migrations
 {
-    public partial class first : Migration
+    /// <inheritdoc />
+    public partial class init00 : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
                 name: "ProductTypes",
                 columns: table => new
                 {
-                    TypeId = table.Column<int>(type: "int", nullable: false)
+                    id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    type = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductTypes", x => x.TypeId);
+                    table.PrimaryKey("PK_ProductTypes", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
-                    ProductId = table.Column<int>(type: "int", nullable: false)
+                    productId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Price = table.Column<int>(type: "int", nullable: false),
-                    Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProductTypeForeignKey = table.Column<int>(type: "int", nullable: false)
+                    name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    price = table.Column<int>(type: "int", nullable: false),
+                    country = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    productTypeid = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.ProductId);
+                    table.PrimaryKey("PK_Products", x => x.productId);
                     table.ForeignKey(
-                        name: "FK_Products_ProductTypes_ProductTypeForeignKey",
-                        column: x => x.ProductTypeForeignKey,
+                        name: "FK_Products_ProductTypes_productTypeid",
+                        column: x => x.productTypeid,
                         principalTable: "ProductTypes",
-                        principalColumn: "TypeId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "id");
                 });
 
             migrationBuilder.InsertData(
                 table: "ProductTypes",
-                columns: new[] { "TypeId", "Type" },
+                columns: new[] { "id", "type" },
                 values: new object[,]
                 {
                     { 1, "Kitchen Utensils" },
@@ -57,22 +60,23 @@ namespace ProductsData.Migrations
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "ProductId", "Country", "Name", "Price", "ProductTypeForeignKey" },
+                columns: new[] { "productId", "country", "name", "price", "productTypeid" },
                 values: new object[,]
                 {
-                    { 1, "COLOMBIA", "Spoon", 32, 1 },
-                    { 2, "CROATIA", "Bycicle", 569, 2 },
-                    { 3, "ITALY", "Necklace", 1600, 3 },
-                    { 4, "FRANCE", "Water", 5, 4 },
-                    { 5, "ITALY", "Chair", 260, 5 }
+                    { 1, "COLOMBIA", "Spoon", 32, null },
+                    { 2, "CROATIA", "Bycicle", 569, null },
+                    { 3, "ITALY", "Necklace", 1600, null },
+                    { 4, "FRANCE", "Water", 5, null },
+                    { 5, "ITALY", "Chair", 260, null }
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_ProductTypeForeignKey",
+                name: "IX_Products_productTypeid",
                 table: "Products",
-                column: "ProductTypeForeignKey");
+                column: "productTypeid");
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
