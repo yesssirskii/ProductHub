@@ -1,3 +1,4 @@
+<p-dialog header = "Add product" *ngIf = "!product.productId" [(visible)] = "displayModal" [modal] = "true" [style] = "{width: '15w'}" [draggable] = "false" [resizable] = "false">
     <div *ngIf = "product">   
         <div>
             <label>Name</label><br>
@@ -11,6 +12,26 @@
             <label>Country</label><br>
             <input pInputText [(ngModel)] = "product.country" placeholder = "Enter here..."/>
         </div>
-        <button pButton type = "button" (click) = "createProduct(product)" *ngIf = "!product.productId">Add</button>
-        <button pButton type = "button" (click) = "updateProduct(product)" *ngIf = "product.productId">Update</button>
+        <button pButton type = "button" (click) = "createProduct(product); displayModal = false" *ngIf = "!product.productId">Add</button>
+        <button pButton type = "button" (click) = "updateProduct(product); displayModal = false" *ngIf = "product.productId">Update</button>
     </div>
+</p-dialog>
+
+<p-dialog header = "Update product" *ngIf = "product.productId" [(visible)] = "displayModal" [modal] = "true" [style] = "{width: '15v'}" [draggable] = "false" [resizable] = "false">
+    <div *ngIf = "product">   
+        <div>
+            <label>Name</label><br>
+            <input pInputText [(ngModel)] = "product.name" placeholder = "Enter here..."/>
+        </div>
+        <div>
+            <label>Price</label><br>
+            <input pInputText [(ngModel)] = "product.price" placeholder = "Enter here...">
+        </div>
+        <div>
+            <label>Country</label><br>
+            <input pInputText [(ngModel)] = "product.country" placeholder = "Enter here..."/>
+        </div>
+        <button pButton type = "button" (click) = "createProduct(product); displayModal = !displayModal" *ngIf = "!product.productId">Add</button>
+        <button pButton type = "button" (click) = "updateProduct(product); displayModal = false" *ngIf = "product.productId">Update</button>
+    </div>
+</p-dialog>

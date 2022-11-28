@@ -16,8 +16,12 @@ export class ProductsListComponent implements OnInit {
   productToEdit: Product; 
   currentProductId: number;
 
+  displayModal: boolean = false;
+
+
   ngOnInit(): void {
    this.getProducts();
+   console.log(this.displayModal);
   }
   
   // Function to get all products:
@@ -43,6 +47,7 @@ export class ProductsListComponent implements OnInit {
   // Function to initialize a new product:
   initNewProduct(){
     this.productToEdit = new Product();
+    console.log(this.displayModal);
   }
   
   // Function to initialize product to update:
