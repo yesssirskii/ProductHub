@@ -40,7 +40,7 @@ namespace ProductsAPI.Controllers
       return await _productService.CreateProduct(product);
     }
 
-    // PUT method:
+    // PUT product method:
     [HttpPut]
     [Route("{id}")]
     public async Task<ActionResult<List<Product>>> Update([FromRoute] int id, Product product)
