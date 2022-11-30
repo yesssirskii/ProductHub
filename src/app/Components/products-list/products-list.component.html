@@ -12,9 +12,9 @@
     </ng-template>
     <ng-template pTemplate="body" let-product>
         <tr>
-            <td>{{product.name}}</td>
-            <td>{{product.price | currency: 'USD'}}</td>
-            <td>{{product.country}}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.price | currency: 'USD'}}</td>
+            <td>{{ product.country }}</td>
             <td><button pButton (click) = "initUpdatedProduct(currentProductId, product); displayModal = !displayModal"><i class="pi pi-file-edit"></i></button><button pButton (click) = "deleteProduct(product.productId)"><i class="pi pi-trash"></i></button></td>
         </tr>
     </ng-template>

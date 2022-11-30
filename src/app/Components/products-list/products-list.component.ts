@@ -9,17 +9,16 @@ import { Product } from 'src/app/Models/product';
 })
 export class ProductsListComponent implements OnInit {
 
-  constructor(private service: ProductService) {}
-
   // Defining variables to be used in other components:
   products: Product[] = [];
   productToEdit: Product; 
   currentProductId: number;
   displayModal: boolean = false;
 
+  constructor(private service: ProductService) {}
+
   ngOnInit(): void {
    this.getProducts();
-   console.log(this.displayModal);
   }
   
   // Function to get all products:
@@ -31,6 +30,7 @@ export class ProductsListComponent implements OnInit {
     // Function to delete a product:
   deleteProduct(id: any){
     if(confirm("Are you sure?")){
+      console.log(id);
       this.service.deleteProduct(id).subscribe(response => {
         this.getProducts(); 
       })
@@ -45,7 +45,6 @@ export class ProductsListComponent implements OnInit {
   // Function to initialize a new product:
   initNewProduct(){
     this.productToEdit = new Product();
-    console.log(this.displayModal);
   }
   
   // Function to initialize product to update:
