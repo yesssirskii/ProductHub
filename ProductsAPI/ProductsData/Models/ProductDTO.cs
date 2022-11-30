@@ -9,8 +9,8 @@ namespace ProductsData.Models
 {
   public class ProductDTO
   {
-    public string? name { get; set; }
-    public int price { get; set; }
-    public string? country { get; set; }
+    public string? Name { get; set; }
+    public int Price { get; set; }
+    public string? Country { get; set; }
   }
 }

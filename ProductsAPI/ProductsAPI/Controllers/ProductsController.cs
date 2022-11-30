@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,105 +9,51 @@ using ProductsAPI.Repositories;
 using ProductsAPI.Services;
 using ProductsData.Entities;
 using ProductsData.Models;
+using System.Data;
 using System.Security.Permissions;
 
 namespace ProductsAPI.Controllers
 {
-  public class ProductsController : Controller
+  [ApiController]
+  [Route("api/[controller]")]
+  public class ProductsController : ControllerBase
   {
     private readonly ProductService _productService;
-    private readonly ProductDbContext _context;
 
     // Injecting the service into the controller using DI:
-    public ProductsController(ProductService productService, ProductDbContext context, IProductRepository repository) //constructor
+    public ProductsController(ProductService productService)
     {
       _productService = productService;
-      _context = context;
     }
 
-    [HttpGet("getProducts")]
-    public async Task<ActionResult<List<Product>>> getProducts()
+    // GET products method:
+    [HttpGet]
+    public async Task<ActionResult<List<Product>>> Get()
     {
-      return Ok(await _context.Products.ToListAsync());
+      return await _productService.GetProducts();
     }
 
-    [HttpPost("addProduct")]
-    public async Task<ActionResult<List<Product>>> addProduct(Product product)
+    // POST product method:
+    [HttpPost]
+    public async Task<ActionResult<List<Product>>> Create(Product product)
     {
-      _context.Products.Add(product);
-      await _context.SaveChangesAsync();
-
-      return Ok(await _context.Products.ToListAsync());
+      return await _productService.CreateProduct(product);
     }
 
-    [HttpPut("updateProduct")]
-    public async Task<ActionResult<List<Product>>> updateProduct(int id, [FromBody] Product product)
+    // PUT product method:
+    [HttpPut]
+    [Route("{id}")]
+    public async Task<ActionResult<List<Product>>> Update([FromRoute] int id, Product product)
     {
-
-      var dbProduct = await _context.Products.FirstOrDefaultAsync(a => a.productId == id);
-      if(dbProduct != null)
-      {
-        dbProduct.name= product.name;
-        dbProduct.price= product.price;
-        dbProduct.country= product.country;
-        dbProduct.productType= product.productType;
-
-        await _context.SaveChangesAsync();
-        return Ok(dbProduct);
-      }
-
-      return NotFound("Product not found.");
-      /*var dbProduct = await _context.Products.FindAsync(product.productId);
-      if (dbProduct == null)
-        return BadRequest("Product not found.");
-
-      dbProduct.name = product.name;
-      dbProduct.price = product.price;
-      dbProduct.country = product.country;
-      dbProduct.productType = product.productType;
-
-      await _context.SaveChangesAsync();
-
-      return Ok(await _context.Products.ToListAsync());*/
+      return await _productService.UpdateProduct(id, product);
     }
 
-    [HttpDelete("deleteProduct")]
-    public async Task<ActionResult<List<Product>>> deleteProduct(int id)
+    // DELETE product method:
+    [HttpDelete]
+    [Route("{id}")]
+    public async Task<ActionResult<List<Product>>> Delete([FromRoute] int id)
     {
-
-      _context.Products.Remove(_context.Products.FirstOrDefault(a => a.productId == id));
-      await _context.SaveChangesAsync();
-
-      return Ok(await _context.Products.ToListAsync());
+      return await _productService.DeleteProduct(id);
     }
   }
-
-  /*
-  // GET products method:
-  [HttpGet("getProducts")]
-  public IActionResult Get()
-  {
-    return Ok(_productService.getProducts());
-  }
-
-  // POST product method:
-  [HttpPost("addProduct")]
-  public ActionResult<List<Product>> Add(Product newProduct)
-  {
-    return Ok(_productService.createProduct(newProduct));
-  }
-
-  // PUT product method:
-  [HttpPut("updateProduct")]
-  public IActionResult Update(Product updatedProduct)
-  {
-    return Ok(_productService.updateProduct(updatedProduct));
-  }
-
-  // DELETE product method:
-  [HttpDelete("deleteProduct")]
-  public ActionResult<List<Product>> Delete(int id)
-  {
-    return Ok(_productService.deleteProduct(id));
-  }*/
 }

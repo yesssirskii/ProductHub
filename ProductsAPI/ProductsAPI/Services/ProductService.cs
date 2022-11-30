@@ -9,55 +9,54 @@ using ProductsData.Entities;
 using Microsoft.AspNetCore.Http;
 using ProductsData.Models;
 
-
 namespace ProductsAPI.Services
 {
-  public class ProductService: ControllerBase
+  public class ProductService : IProductService
   {
     // Injecting the product repository and the ProductDTO class into the product service:
-    private readonly IProductRepository _repository;
     private readonly ProductDbContext _context;
+    private readonly IMapper _mapper;
 
-    public ProductService(IProductRepository repository, IMapper mapper, ProductDbContext context)
+    public ProductService(ProductDbContext context, IMapper mapper)
     {
-      _repository = repository;
       _context = context;
+      _mapper = mapper; 
+    }
+
+    public async Task<ActionResult<List<Product>>> GetProducts()
+    {
+      return await _context.Products.ToListAsync();
+    }
+
+    public async Task<ActionResult<List<Product>>> CreateProduct(Product product)
+    {
+      _context.Products.Add(product);
+      await _context.SaveChangesAsync();
+
+      return await _context.Products.ToListAsync();
+    }
+    public async Task<ActionResult<List<Product>>> UpdateProduct(int id, Product product)
+    {
+
+      var dbProduct = await _context.Products.FirstOrDefaultAsync(x => x.ProductId == id);
+
+      dbProduct.Name = product.Name;
+      dbProduct.Price = product.Price;
+      dbProduct.Country = product.Country;
+      dbProduct.ProductType = product.ProductType;
+
+      await _context.SaveChangesAsync();
+
+      return await _context.Products.ToListAsync();
+    }
+
+    public async Task<ActionResult<List<Product>>> DeleteProduct(int id)
+    {
+      _context.Products.Remove(_context.Products.FirstOrDefault(a => a.ProductId == id));
+      await _context.SaveChangesAsync();
+
+      return await _context.Products.ToListAsync();
     }
   }
-
-  /*
-  // GET method:
-  public ActionResult<List<Product>> getProducts()
-  {
-    return Ok(_context.Products.Select(product => _mapper.Map<ProductDTO>(product)));
-  }
-
-  // POST method:
-  public ActionResult<List<Product>> addProduct(ProductDTO newProduct)
-  {
-    var product = _mapper.Map<Product>(newProduct);
-    _context.Products.Add(product);
-
-    return Ok(_context.Products.Select(product => _mapper.Map<ProductDTO>(product)));
-  }
-
-  // PUT method:
-  public ActionResult<List<Product>> updateProduct(int id, ProductDTO productDto)
-  {
-    var product = _repository.getProductById(id);
-    _mapper.Map(productDto, product);
-
-    return Ok(_mapper.Map<ProductDTO>(product));
-  }
-
-  // DELETE method:
-  public ActionResult<List<Product>> deleteProduct(int id)
-  {
-    var product = _repository.getProductById(id);
-    _context.Products.Remove(product);
-
-    return Ok(_context.Products.Select(product => _mapper.Map<ProductDTO>(product)));
-  }
-  */
 }
 

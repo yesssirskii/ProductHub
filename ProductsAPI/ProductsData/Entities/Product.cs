@@ -1,3 +1,4 @@
+using AutoMapper.Configuration.Annotations;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
@@ -12,10 +13,10 @@ namespace ProductsData.Entities
   public class Product
   {
     [Key]
-    public int productId { get; set; }
-    public string? name { get; set; }  
-    public int price { get; set; }
-    public string? country { get; set; }
-    public ProductType? productType { get; set; }
+    public int ProductId { get; set; }
+    public string? Name { get; set; }  
+    public double Price { get; set; }
+    public string? Country { get; set; }
+    public ProductType? ProductType { get; set; }
   }
 }

@@ -24,118 +24,118 @@ namespace ProductsData.Migrations
 
             modelBuilder.Entity("ProductsData.Entities.Product", b =>
                 {
-                    b.Property<int>("productId")
+                    b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("productId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"));
 
-                    b.Property<string>("country")
+                    b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("name")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("price")
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<int?>("ProductTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("productTypeid")
-                        .HasColumnType("int");
+                    b.HasKey("ProductId");
 
-                    b.HasKey("productId");
-
-                    b.HasIndex("productTypeid");
+                    b.HasIndex("ProductTypeId");
 
                     b.ToTable("Products");
 
                     b.HasData(
                         new
                         {
-                            productId = 1,
-                            country = "COLOMBIA",
-                            name = "Spoon",
-                            price = 32
+                            ProductId = 1,
+                            Country = "COLOMBIA",
+                            Name = "Spoon",
+                            Price = 9.9900000000000002
                         },
                         new
                         {
-                            productId = 2,
-                            country = "CROATIA",
-                            name = "Bycicle",
-                            price = 569
+                            ProductId = 2,
+                            Country = "CROATIA",
+                            Name = "Bycicle",
+                            Price = 4.9989999999999997
                         },
                         new
                         {
-                            productId = 3,
-                            country = "ITALY",
-                            name = "Necklace",
-                            price = 1600
+                            ProductId = 3,
+                            Country = "ITALY",
+                            Name = "Necklace",
+                            Price = 700.0
                         },
                         new
                         {
-                            productId = 4,
-                            country = "FRANCE",
-                            name = "Water",
-                            price = 5
+                            ProductId = 4,
+                            Country = "FRANCE",
+                            Name = "Water",
+                            Price = 3.9900000000000002
                         },
                         new
                         {
-                            productId = 5,
-                            country = "ITALY",
-                            name = "Chair",
-                            price = 260
+                            ProductId = 5,
+                            Country = "ITALY",
+                            Name = "Chair",
+                            Price = 350.0
                         });
                 });
 
             modelBuilder.Entity("ProductsData.Entities.ProductType", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("type")
+                    b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("ProductTypes");
 
                     b.HasData(
                         new
                         {
-                            id = 1,
-                            type = "Kitchen Utensils"
+                            Id = 1,
+                            Type = "Kitchen Utensils"
                         },
                         new
                         {
-                            id = 2,
-                            type = "Transportation"
+                            Id = 2,
+                            Type = "Transportation"
                         },
                         new
                         {
-                            id = 3,
-                            type = "Jewlery"
+                            Id = 3,
+                            Type = "Jewlery"
                         },
                         new
                         {
-                            id = 4,
-                            type = "Consumables"
+                            Id = 4,
+                            Type = "Consumables"
                         },
                         new
                         {
-                            id = 5,
-                            type = "Furniture"
+                            Id = 5,
+                            Type = "Furniture"
                         });
                 });
 
             modelBuilder.Entity("ProductsData.Entities.Product", b =>
                 {
-                    b.HasOne("ProductsData.Entities.ProductType", "productType")
+                    b.HasOne("ProductsData.Entities.ProductType", "ProductType")
                         .WithMany()
-                        .HasForeignKey("productTypeid");
+                        .HasForeignKey("ProductTypeId");
 
-                    b.Navigation("productType");
+                    b.Navigation("ProductType");
                 });
 #pragma warning restore 612, 618
         }

@@ -21,22 +21,22 @@ namespace ProductsData.Entities
       modelBuilder.Entity<ProductType>(entity =>
       {
         entity.HasData(
-          new ProductType { id = 1, type = "Kitchen Utensils" },
-          new ProductType { id = 2, type = "Transportation" },
-          new ProductType { id = 3, type = "Jewlery" },
-          new ProductType { id = 4, type = "Consumables" },
-          new ProductType { id = 5, type = "Furniture" }
+          new ProductType { Id = 1, Type = "Kitchen Utensils" },
+          new ProductType { Id = 2, Type = "Transportation" },
+          new ProductType { Id = 3, Type = "Jewlery" },
+          new ProductType { Id = 4, Type = "Consumables" },
+          new ProductType { Id = 5, Type = "Furniture" }
           );
       });
 
       modelBuilder.Entity<Product>(entity =>
       {
         entity.HasData(
-          new Product { productId = 1, name = "Spoon", price = 32, country = "COLOMBIA"},
-          new Product { productId = 2, name = "Bycicle", price = 569, country = "CROATIA"},
-          new Product { productId = 3, name = "Necklace", price = 1600, country = "ITALY"},
-          new Product { productId = 4, name = "Water", price = 5, country = "FRANCE"},
-          new Product { productId = 5, name = "Chair", price = 260, country = "ITALY"}
+          new Product { ProductId = 1, Name = "Spoon", Price = 9.99, Country = "COLOMBIA"},
+          new Product { ProductId = 2, Name = "Bycicle", Price = 4.999, Country = "CROATIA"},
+          new Product { ProductId = 3, Name = "Necklace", Price = 700.00, Country = "ITALY"},
+          new Product { ProductId = 4, Name = "Water", Price = 3.99, Country = "FRANCE"},
+          new Product { ProductId = 5, Name = "Chair", Price = 350.00, Country = "ITALY"}
           );
       });
     }

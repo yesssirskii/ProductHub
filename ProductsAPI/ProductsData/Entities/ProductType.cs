@@ -11,7 +11,7 @@ namespace ProductsData.Entities
   public class ProductType
   {
     [Key]
-    public int id { get; set; }
-    public string? type { get; set; }
+    public int Id { get; set; }
+    public string? Type { get; set; }
   }
 }

@@ -12,8 +12,8 @@ using ProductsData.Entities;
 namespace ProductsData.Migrations
 {
     [DbContext(typeof(ProductDbContext))]
-    [Migration("20221115180209_nameUpdate")]
-    partial class nameUpdate
+    [Migration("20221121124453_init00")]
+    partial class init00
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
