@@ -1,4 +1,3 @@
-using ProductsData.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace ProductsData.Models
 {
-  public class ProductDTO
+  public class UpdateProductDTO
   {
     public string? Name { get; set; }
-    public int Price { get; set; }
+    public double Price { get; set; }
     public string? Country { get; set; }
   }
 }
