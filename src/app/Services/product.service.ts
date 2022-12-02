@@ -15,7 +15,7 @@ export class ProductService {
   private api = environment.apiUrl;
 
   private url = 'api/Products';
-  private putDeleteURL = this.api +'api/Products/';
+  private putDeleteURL = this.api + 'api/Products/';
 
   public getProducts(): Observable<Product[]>{
     return this.http.get<Product[]>(this.api + this.url);

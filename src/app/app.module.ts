@@ -34,7 +34,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     ConfirmPopupModule,
     ConfirmDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]
