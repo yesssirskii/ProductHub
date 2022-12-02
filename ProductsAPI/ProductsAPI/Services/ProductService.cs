@@ -24,6 +24,11 @@ namespace ProductsAPI.Services
       return _mapper.Map<GetProductsDTO[]>(_productRepository.GetProducts());
     }
 
+    public IEnumerable<GetProductTypesDTO> GetProductTypes()
+    {
+      return _mapper.Map<GetProductTypesDTO[]>(_productRepository.GetProductTypes());
+    }
+
     public IEnumerable<Product> CreateProduct(CreateProductDTO createProductDto)
     {
       _context.Products.Add(_mapper.Map<Product>(createProductDto));

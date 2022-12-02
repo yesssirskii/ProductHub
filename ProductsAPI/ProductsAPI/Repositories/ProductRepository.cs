@@ -17,6 +17,11 @@ namespace ProductsAPI.Repositories
       return _productDbContext.Products;
     }
 
+    public DbSet<ProductType> GetProductTypes()
+    {
+      return _productDbContext.ProductTypes;  
+    }
+
     public DbSet<Product> DeleteProduct(int id)
     {
       _productDbContext.Products.Remove(_productDbContext.Products.FirstOrDefault(a => a.ProductId == id));
