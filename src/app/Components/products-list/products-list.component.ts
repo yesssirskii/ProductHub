@@ -9,7 +9,6 @@ import { Product } from 'src/app/Models/product';
 })
 export class ProductsListComponent implements OnInit {
 
-  // Defining variables to be used in other components:
   products: Product[] = [];
   productToEdit: Product; 
   currentProductId: number;
@@ -27,10 +26,9 @@ export class ProductsListComponent implements OnInit {
   }
 
   deleteProduct(id: number){
-    if(confirm("Are you sure?")){
-      console.log(id);
+    if(confirm("Are you sure you want to delete this product?")){
       this.service.deleteProduct(id).subscribe(response => {
-        this.getProducts(); 
+        this.products = response; 
       })
     }
   }
