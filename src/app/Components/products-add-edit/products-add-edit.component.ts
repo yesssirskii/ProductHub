@@ -11,19 +11,16 @@ export class ProductsAddEditComponent implements OnInit {
 
   @Input() product: Product;
   @Input() currentProductId: number;
-  @Input() displayModal: boolean;
+  @Input() displayModal: boolean = false;
   @Output() updatedProduct = new EventEmitter<Product[]>();
 
-  constructor(private service: ProductService) {
-    this.currentProductId = this.product?.productId;
-  }
+  constructor(private service: ProductService) {this.currentProductId = this.product?.productId;}
 
   ngOnInit(): void {}
   
   // create new product
   createProduct(product: Product){
     this.service.addProduct(product).subscribe((products: Product[]) => this.updatedProduct.emit(products));
-    this.displayModal = !this.displayModal;
   }
 
   // update product details
@@ -31,6 +28,5 @@ export class ProductsAddEditComponent implements OnInit {
     this.currentProductId = product.productId; // the line which was missing to get the product ID
     console.log(this.currentProductId);
     this.service.updateProduct(this.currentProductId, product).subscribe((products: Product[]) => this.updatedProduct.emit(products));
-    this.displayModal = !this.displayModal;
   }
 }

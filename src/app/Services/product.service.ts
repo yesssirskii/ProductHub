@@ -32,7 +32,7 @@ export class ProductService {
   }
 
   // DELETE method:
-  public deleteProduct(id: any){
+  public deleteProduct(id: number): Observable<Product[]>{
     return this.http.delete<Product[]>(this.putDeleteURL + id);
   }
 }
