@@ -1,5 +1,5 @@
 <h1>Product workshop</h1>
-<p-button (click) = "initNewProduct(); displayModal = !displayModal">New product</p-button>
+<p-button pRipple class = "p-button-raised" (click) = "initNewProduct(); displayModal = !displayModal"><i class="pi pi-plus"></i></p-button>
 <h2>Products</h2>
 <p-table [value] = "products">
     <ng-template pTemplate="header">
@@ -7,6 +7,7 @@
             <th pSortableColumn="name">NAME<p-sortIcon field="name"></p-sortIcon></th>
             <th pSortableColumn="price">PRICE<p-sortIcon field="price"></p-sortIcon></th>
             <th pSortableColumn="country">COUNTRY<p-sortIcon field="country"></p-sortIcon></th>
+            <th pSortableColumn="type">TYPE<p-sortIcon field="type"></p-sortIcon></th>
             <th>OPTIONS</th>
         </tr>
     </ng-template>
@@ -15,8 +16,9 @@
             <td>{{ product.name }}</td>
             <td>{{ product.price | currency: 'USD'}}</td>
             <td>{{ product.country }}</td>
-            <td><button pButton (click) = "initUpdatedProduct(product.productId, product); displayModal = !displayModal"><i class="pi pi-file-edit"></i></button><button pButton (click) = "deleteProduct(product.productId)"><i class="pi pi-trash"></i></button></td>
+            <td>{{ product.type }}</td>
+            <td><button pButton pRipple class = "p-button-raised" (click) = "initUpdatedProduct(product.productId, product); displayModal = !displayModal"><i class="pi pi-file-edit"></i></button><button pButton pRipple (click) = "deleteProduct(product.productId)" class="p-button-danger p-button-raised"><i class="pi pi-trash"></i></button></td>
         </tr>
     </ng-template>
 </p-table>
-<app-products-add-edit [product] = "productToEdit" (updatedProduct) = "updateProductList($event)" [currentProductId] = "currentProductId" [displayModal] = "displayModal"></app-products-add-edit>
+<app-products-add-edit [product] = "productToEdit" (updatedProduct) = "updateProductList($event)" [currentProductId] = "currentProductId" [displayModal] = "displayModal" ></app-products-add-edit>

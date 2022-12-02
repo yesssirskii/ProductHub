@@ -1,34 +1,84 @@
-<p-dialog header = "Add product" *ngIf = "!product.productId" [(visible)] = "displayModal" [modal] = "true" [style] = "{width: '15w'}" [draggable] = "false" [resizable] = "false">
-    <div *ngIf = "product">   
-        <div>
-            <input pInputText [(ngModel)] = "product.name" placeholder = "Name..."/>
+<form class="form" [formGroup] = "productForm">  
+    <p-dialog header = "Add product" *ngIf = "!product.productId" [(visible)] = "displayModal" [modal] = "true" [style] = "{width: '15vw'}" [draggable] = "false" [resizable] = "false">
+        <div *ngIf = "product">   
+            <div>
+                <input pInputText [(ngModel)] = "product.name" placeholder = "Name..." class="form-control" formControlName = "name">
+                <div *ngIf = "productForm.controls['name'].invalid && (productForm.controls['name'].dirty || productForm.controls['name'].touched)" class="alert alert-danger">
+                    <div *ngIf = "productForm.controls['price'].errors">
+                        <span style = "color: red;">Name is required.</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <input pInputText [(ngModel)] = "product.price" placeholder = "Price..." class = "form-control" formControlName = "price">
+                <div *ngIf = "productForm.controls['price'].invalid && (productForm.controls['price'].dirty || productForm.controls['price'].touched)" class="alert alert-danger">
+                    <div *ngIf = "productForm.controls['price'].errors">
+                        <span style = "color: red;">Price is required.</span>   
+                    </div>
+                </div>
+            </div>
+            <div>
+                <input pInputText [(ngModel)] = "product.country" placeholder = "Country..." class = "form-control" formControlName = "country">
+                <div *ngIf = "productForm.controls['country'].invalid && (productForm.controls['country'].dirty || productForm.controls['country'].touched)" class="alert alert-danger">
+                    <div *ngIf = "productForm.controls['country'].errors">
+                        <span style = "color: red;">Country is required.</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <input pInputText [(ngModel)] = "product.type" placeholder = "Type..." class="form-control" formControlName = "type">
+                <div *ngIf = "productForm.controls['type'].invalid && (productForm.controls['type'].dirty || productForm.controls['type'].touched)" class="alert alert-danger">
+                    <div *ngIf = "productForm.controls['type'].errors">
+                        <span style = "color: red;">Type is required.</span>
+                    </div>
+                </div>
+            </div>
+            <button pButton type = "button" label = "Add" icon = "pi pi-check" iconPos = "right" (click) = "createProduct(product); displayModal = false" *ngIf = "!product.productId" [disabled] = "productForm.pristine || productForm.invalid"></button>
         </div>
-        <div>
-            <input pInputText [(ngModel)] = "product.price" placeholder = "Price...">
-        </div>
-        <div>
-            <input pInputText [(ngModel)] = "product.country" placeholder = "Country..."/>
-        </div>
-        <button pButton type = "button" (click) = "createProduct(product); displayModal = false" *ngIf = "!currentProductId">Add</button>
-        <button pButton type = "button" (click) = "updateProduct(product); displayModal = false" *ngIf = "currentProductId">Update</button>
-    </div>
-</p-dialog>
+    </p-dialog>
+</form>
 
-<p-dialog header = "Update product" *ngIf = "product.productId" [(visible)] = "displayModal" [modal] = "true" [style] = "{width: '15v'}" [draggable] = "false" [resizable] = "false">
-    <div *ngIf = "product">   
-        <div>
-            <label>Name</label><br>
-            <input pInputText [(ngModel)] = "product.name"/>
+<form class="form" [formGroup] = "productForm">
+    <p-dialog header = "Update product" *ngIf = "product.productId" [(visible)] = "displayModal" [modal] = "true" [style] = "{width: '15vw'}" [draggable] = "false" [resizable] = "false">
+        <div *ngIf = "product">   
+            <div>
+                <label>Name</label><br>
+                <input pInputText [(ngModel)] = "product.name" class="form-control" formControlName = "name"/>
+                <div *ngIf = "productForm.controls['name'].invalid && (productForm.controls['name'].dirty || productForm.controls['name'].touched)" class="alert alert-danger">
+                    <div *ngIf = "productForm.controls['name'].errors">
+                        <span style = "color: red;">Name is required.</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <label>Price</label><br>
+                <input pInputText [(ngModel)] = "product.price" class="form-control" formControlName = "price"/>
+                <div *ngIf = "productForm.controls['price'].invalid && (productForm.controls['price'].dirty || productForm.controls['price'].touched)" class="alert alert-danger">
+                    <div *ngIf = "productForm.controls['price'].errors">
+                        <span style = "color: red;">Price is required.</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <label>Country</label><br>
+                <input pInputText [(ngModel)] = "product.country" class="form-control" formControlName = "country"/>
+                <div *ngIf = "productForm.controls['country'].invalid && (productForm.controls['country'].dirty || productForm.controls['country'].touched)" class="alert alert-danger">
+                    <div *ngIf = "productForm.controls['country'].errors">
+                        <span style = "color: red;">Country is required.</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <label>Type</label><br>
+                <input pInputText [(ngModel)] = "product.type" placeholder = "Type..." class="form-control" formControlName = "type">
+                <div *ngIf = "productForm.controls['type'].invalid && (productForm.controls['type'].dirty || productForm.controls['type'].touched)" class="alert alert-danger">
+                    <div *ngIf = "productForm.controls['type'].errors">
+                        <span style = "color: red;">Type is required.</span>
+                    </div>
+                </div>
+            </div>
+            <p-confirmPopup></p-confirmPopup>
+            <button pButton type = "button" label = "Update" icon = "pi pi-check" iconPos = "right" (click) = "updateProduct(product); displayModal = false;" *ngIf = "product.productId" [disabled] = "productForm.pristine || productForm.invalid"></button>
         </div>
-        <div>
-            <label>Price</label><br>
-            <input pInputText [(ngModel)] = "product.price"/>
-        </div>
-        <div>
-            <label>Country</label><br>
-            <input pInputText [(ngModel)] = "product.country"/>
-        </div>
-        <button pButton type = "button" (click) = "createProduct(product); displayModal = false" *ngIf = "!product.productId">Add</button>
-        <button pButton type = "button" (click) = "updateProduct(product); displayModal = false" *ngIf = "product.productId">Update</button>
-    </div>
-</p-dialog>
+    </p-dialog>
+</form>
