@@ -18,17 +18,15 @@ export class ProductsListComponent implements OnInit {
   constructor(private service: ProductService) {}
 
   ngOnInit(): void {
-   this.getProducts();
+    this.getProducts();
   }
   
-  // Function to get all products:
   getProducts(){
     this.service.getProducts().subscribe((response: Product[]) =>
       (this.products = response));
   }
 
-    // Function to delete a product:
-  deleteProduct(id: any){
+  deleteProduct(id: number){
     if(confirm("Are you sure?")){
       console.log(id);
       this.service.deleteProduct(id).subscribe(response => {
@@ -37,7 +35,6 @@ export class ProductsListComponent implements OnInit {
     }
   }
 
-  // Function which updates product list:
   updateProductList(products: Product[]){
     this.products = products;
   }
