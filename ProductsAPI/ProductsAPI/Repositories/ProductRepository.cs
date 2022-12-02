@@ -1,22 +1,17 @@
-using AutoMapper;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
 using ProductsData.Entities;
-using ProductsData.Models;
 
 namespace ProductsAPI.Repositories
 {
   public class IProductRepository
   {
-    // Creating a constructor and injecting the ProductDbContext class into the repository:
     private readonly ProductDbContext _productDbContext;
     public IProductRepository(ProductDbContext productDbContext)
     {
       _productDbContext = productDbContext;
     }
 
-    // Creating a method which returns the DbSet Products from the ProductDbContext class:
+    // The functions below are used in the service (repository pattern; repository -> service -> controller):
     public DbSet<Product> GetProducts()
     {
       return _productDbContext.Products;
@@ -28,8 +23,6 @@ namespace ProductsAPI.Repositories
       _productDbContext.SaveChanges();
 
       return _productDbContext.Products;
-
-
     }
   }
 }
