@@ -12,7 +12,6 @@ namespace ProductsAPI.Configuration
       CreateMap<CreateProductDTO, Product>();
       CreateMap<UpdateProductDTO, Product>();
       CreateMap<DeleteProductDTO, Product>();
-      CreateMap<Product, DeleteProductDTO>();
     }
   }
 }

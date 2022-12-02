@@ -1,8 +1,4 @@
-using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using ProductsAPI;
-using ProductsAPI.Configuration;
 using ProductsAPI.Controllers;
 using ProductsAPI.Repositories;
 using ProductsAPI.Services;
@@ -11,8 +7,7 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+// Adding services to the container:
 builder.Services.AddScoped<IProductRepository>();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<ProductService>();
