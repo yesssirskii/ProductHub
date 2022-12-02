@@ -28,32 +28,32 @@ namespace ProductsAPI.Controllers
 
     // GET products method:
     [HttpGet]
-    public async Task<ActionResult<List<Product>>> Get()
+    public IActionResult Get()
     {
-      return await _productService.GetProducts();
+      return Ok(_productService.GetProducts());
     }
 
     // POST product method:
     [HttpPost]
-    public async Task<ActionResult<List<Product>>> Create(Product product)
+    public IActionResult Create(CreateProductDTO createProductDto)
     {
-      return await _productService.CreateProduct(product);
+      return Ok(_productService.CreateProduct(createProductDto));
     }
 
     // PUT product method:
     [HttpPut]
     [Route("{id}")]
-    public async Task<ActionResult<List<Product>>> Update([FromRoute] int id, Product product)
+    public IActionResult Update([FromRoute] int id, UpdateProductDTO updateProductDto)
     {
-      return await _productService.UpdateProduct(id, product);
+      return Ok(_productService.UpdateProduct(id, updateProductDto));
     }
 
     // DELETE product method:
     [HttpDelete]
     [Route("{id}")]
-    public async Task<ActionResult<List<Product>>> Delete([FromRoute] int id)
+    public IActionResult Delete([FromRoute] int id)
     {
-      return await _productService.DeleteProduct(id);
+      return Ok(_productService.DeleteProduct(id));
     }
   }
 }

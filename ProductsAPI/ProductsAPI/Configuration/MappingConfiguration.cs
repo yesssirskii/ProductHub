@@ -1,5 +1,4 @@
 using AutoMapper;
-using ProductsAPI.Repositories;
 using ProductsData.Entities;
 using ProductsData.Models;
 
@@ -9,9 +8,11 @@ namespace ProductsAPI.Configuration
   {
     public MappingConfiguration()
     {
-      // Defining a profile to convert from Product to productDTO:
-      CreateMap<Product, ProductDTO>();
-      CreateMap<ProductDTO, Product>();
+      CreateMap<Product, GetProductsDTO>();
+      CreateMap<CreateProductDTO, Product>();
+      CreateMap<UpdateProductDTO, Product>();
+      CreateMap<DeleteProductDTO, Product>();
+      CreateMap<Product, DeleteProductDTO>();
     }
   }
 }
