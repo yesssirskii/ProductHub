@@ -1,4 +1,4 @@
-<p-dialog header = "Add product" *ngIf = "!product.productId" [(visible)] = "displayModal" [modal] = "true" [style] = "{width: '15w'}" [draggable] = "false" [resizable] = "false">
+<p-dialog header = "Add product" *ngIf = "!currentProductId" [(visible)] = "displayModal" [modal] = "true" [style] = "{width: '15w'}" [draggable] = "false" [resizable] = "false">
     <div *ngIf = "product">   
         <div>
             <label>Name</label><br>
@@ -12,12 +12,12 @@
             <label>Country</label><br>
             <input pInputText [(ngModel)] = "product.country" placeholder = "Enter here..."/>
         </div>
-        <button pButton type = "button" (click) = "createProduct(product); displayModal = false" *ngIf = "!product.productId">Add</button>
-        <button pButton type = "button" (click) = "updateProduct(product); displayModal = false" *ngIf = "product.productId">Update</button>
+        <button pButton type = "button" (click) = "createProduct(product); displayModal = false" *ngIf = "!currentProductId">Add</button>
+        <button pButton type = "button" (click) = "updateProduct(product); displayModal = false" *ngIf = "currentProductId">Update</button>
     </div>
 </p-dialog>
 
-<p-dialog header = "Update product" *ngIf = "product.productId" [(visible)] = "displayModal" [modal] = "true" [style] = "{width: '15v'}" [draggable] = "false" [resizable] = "false">
+<p-dialog header = "Update product" *ngIf = "currentProductId" (visible)] = "displayModal" [modal] = "true" [style] = "{width: '15v'}" [draggable] = "false" [resizable] = "false">
     <div *ngIf = "product">   
         <div>
             <label>Name</label><br>

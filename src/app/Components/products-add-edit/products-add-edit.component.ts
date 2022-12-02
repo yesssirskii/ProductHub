@@ -23,12 +23,13 @@ export class ProductsAddEditComponent implements OnInit {
   // create new product
   createProduct(product: Product){
     this.service.addProduct(product).subscribe((products: Product[]) => this.updatedProduct.emit(products));
-    this. displayModal = !this.displayModal;
+    this.displayModal = !this.displayModal;
   }
 
   // update product details
   updateProduct(product: Product){
     this.currentProductId = product.productId; // the line which was missing to get the product ID
+    console.log(this.currentProductId);
     this.service.updateProduct(this.currentProductId, product).subscribe((products: Product[]) => this.updatedProduct.emit(products));
     this.displayModal = !this.displayModal;
   }
