@@ -12,27 +12,16 @@ import { ConfirmationService } from 'primeng/api';
 })
 export class ProductsAddEditComponent implements OnInit {
 
-  productForm: FormGroup;
-
   @Input() product: Product;
   @Input() currentProductId: number;
   @Input() displayModal: boolean = false;
   @Output() updatedProduct = new EventEmitter<Product[]>();
 
-  constructor(private service: ProductService, private fb: FormBuilder) {this.currentProductId = this.product?.productId;}
-
-  ngOnInit(): void {
-    this.productForm = this.fb.group({
-      name: ['', Validators.required],
-      price: ['', Validators.required],
-      country: ['', Validators.required],
-      type: ['', Validators.required],
-    });
+  constructor(private service: ProductService) {
+    this.currentProductId = this.product?.productId;
   }
 
-  get registerFormControl() {
-    return this.productForm.controls;
-  }
+  ngOnInit(): void {}
   
   createProduct(product: Product){
     this.service.addProduct(product).subscribe((products: Product[]) => this.updatedProduct.emit(products));
