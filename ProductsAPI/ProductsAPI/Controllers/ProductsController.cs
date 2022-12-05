@@ -16,7 +16,6 @@ namespace ProductsAPI.Controllers
     }
 
     // This is the controller. It consists of API endpoints which are one-liners calling methods from the service.
-
     [HttpGet]
     public IActionResult Get()
     {
