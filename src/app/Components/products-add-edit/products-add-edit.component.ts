@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ProductService } from '../../Services/product.service';
-import { Product } from 'src/app/Models/product';
-import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { ConfirmationService } from 'primeng/api';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Product } from 'src/app/Models/product';
 
 @Component({
   selector: 'app-products-add-edit',
@@ -17,11 +17,14 @@ export class ProductsAddEditComponent implements OnInit {
   @Input() displayModal: boolean = false;
   @Output() updatedProduct = new EventEmitter<Product[]>();
 
-  constructor(private service: ProductService) {
-    this.currentProductId = this.product?.productId;
-  }
+  constructor(private service: ProductService) {}
 
   ngOnInit(): void {}
+
+  name: FormControl = new FormControl('', [Validators.required, Validators.minLength(3)]);
+  price: FormControl = new FormControl('', [Validators.required]);
+  country: FormControl = new FormControl('', [Validators.required, Validators.minLength(3)]);
+  type: FormControl = new FormControl('', [Validators.required, Validators.minLength(3)]);
   
   createProduct(product: Product){
     this.service.addProduct(product).subscribe((products: Product[]) => this.updatedProduct.emit(products));
@@ -32,3 +35,4 @@ export class ProductsAddEditComponent implements OnInit {
     this.service.updateProduct(this.currentProductId, product).subscribe((products: Product[]) => this.updatedProduct.emit(products));
   }
 }
+
