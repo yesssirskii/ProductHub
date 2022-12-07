@@ -1,109 +1,223 @@
-<form>  
-    <p-dialog header = "Add product" *ngIf = "!product.productId" [(visible)] = "displayModal" [modal] = "true" [style] = "{width: '15vw'}" [draggable] = "false" [resizable] = "false">
-        <div *ngIf = "product">   
-            <div>
-                <label for="name" class="form-label">Name:</label>
-                <input pInputText type = "text" [formControl] = "name" placeholder = "Name..." required required minlength = "3"/>
-                <div *ngIf = "name.invalid && (name.dirty || name.touched)" class = "invalid-feedback">
-                    <div *ngIf = "name.errors?.['required']">
-                        <span style = "color: red;">Name is required.</span>
-                    </div>
-                    <div *ngIf = "name.errors?.['minlength']">
-                        <span style = "color: red;">Price must have at least 3 characters.</span>
-                    </div>
+<!--ADD product form-->
+<form [formGroup] = "productAddForm">  
+    <p-dialog
+        *ngIf = "!product.productId"
+        header = "Add product"  
+        [(visible)] = "displayModal" 
+        [style] = "{width: '20vw'}" 
+        [modal] = "true" 
+        [draggable] = "false" 
+        [resizable] = "false">
+        <div>
+            <label for="name" class="form-label">
+                Name:
+            </label>
+            <br>
+            <input 
+                pInputText 
+                type = "text" 
+                id = "name" 
+                class = "form-control"
+                formControlName = "name" 
+                placeholder = "Ex. Stove" 
+                minlength = "3"
+                required/>
+            <div *ngIf = "productAddForm.controls['name'].invalid && (productAddForm.controls['name'].dirty || productAddForm.controls['name'].touched)" class = "invalid-feedback">
+                <div *ngIf = "productAddForm.controls['name'].errors?.['required']">
+                    <span style = "color: red;">Name is required.</span>
                 </div>
-                {{ name.value }}
-            </div>
-            <div>
-                <label for = "price" class="form-label">Price:</label>
-                <input pInputText type = "text" [formControl] = "price" placeholder = "Price..."/>
-                <div *ngIf = "price.invalid && (price.dirty || price.touched)" class = "invalid-feedback">
-                    <div *ngIf = "price!.errors?.['required']">
-                        <span style = "color: red;">Price is required.</span>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <label for = "country" class="form-label">Country:</label>
-                <input pInputText type = "text" [formControl] = "country" placeholder = "Country..." required minlength = "3"/>
-                <div *ngIf = "country.invalid && (country.dirty || country.touched)" class = "invalid-feedback">
-                    <div *ngIf = "country.errors?.['required']">
-                        <span style = "color: red;">Country is required.</span>
-                    </div>
-                    <div *ngIf = "country.errors?.['minlength']">
-                        <span style = "color: red;">Country must have at least 3 characters.</span>
-                    </div>
+                <div *ngIf = "productAddForm.controls['name'].errors?.['minlength']">
+                    <span style = "color: red;">Price must have at least 3 characters.</span>
                 </div>
             </div>
-            <div>
-                <label for = "type" class="form-label">Type:</label>
-                <input pInputText type = "text" [formControl] = "type" placeholder = "Type..." required minlength = "3"/>
-                <div *ngIf = "type.invalid && (type.dirty || type.touched)" class = "invalid-feedback">
-                    <div *ngIf = "type.errors?.['required']">
-                        <span style = "color: red;">Type is required.</span>
-                    </div>
-                    <div *ngIf = "type.errors?.['minlength']">
-                        <span style = "color: red;">Type must have at least 3 characters.</span>
-                    </div>
-                </div>
-            </div>
-            <button pButton type = "submit" label = "Add" icon = "pi pi-check" iconPos = "right" (click) = "createProduct(product); displayModal = false" *ngIf = "!product.productId"></button>
         </div>
+        <div>
+            <label for = "price" class="form-label">
+                Price:
+            </label>
+            <br>
+            <input 
+                pInputText 
+                type = "text" 
+                id = "price" 
+                class = "form-control"
+                formControlName = "price" 
+                placeholder = "$USD"
+                required/>
+            <div *ngIf = "productAddForm.controls['price'].invalid && (productAddForm.controls['price'].dirty || productAddForm.controls['price'].touched)" class = "invalid-feedback">
+                <div *ngIf = "productAddForm.controls['price'].errors?.['required']">
+                    <span style = "color: red;">Price is required.</span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <label for = "country" class="form-label">
+                Country:
+            </label>
+            <br>
+            <input 
+                pInputText 
+                type = "text" 
+                id = "country" 
+                class = "form-control"
+                formControlName = "country" 
+                placeholder = "Ex. CROATIA" 
+                minlength = "3"
+                required/>
+            <div *ngIf = "productAddForm.controls['country'].invalid && (productAddForm.controls['country'].dirty || productAddForm.controls['country'].touched)" class = "invalid-feedback">
+                <div *ngIf = "productAddForm.controls['country'].errors?.['required']">
+                    <span style = "color: red;">Country is required.</span>
+                </div>
+                <div *ngIf = "productAddForm.controls['country'].errors?.['minlength']">
+                    <span style = "color: red;">Country must have at least 3 characters.</span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <label for = "type" class="form-label">
+                Type:
+            </label>
+            <br>
+            <input 
+                pInputText 
+                type = "text" 
+                id = "type" 
+                class = "form-control"
+                formControlName = "type" 
+                placeholder = "Ex. Kitchen Appliances" 
+                minlength = "3"
+                required/>
+            <div *ngIf = "productAddForm.controls['type'].invalid && (productAddForm.controls['type'].dirty || productAddForm.controls['type'].touched)" class = "invalid-feedback">
+                <div *ngIf = "productAddForm.controls['type'].errors?.['required']">
+                    <span style = "color: red;">Type is required.</span>
+                </div>
+                <div *ngIf = "productAddForm.controls['type'].errors?.['minlength']">
+                    <span style = "color: red;">Type must have at least 3 characters.</span>
+                </div>
+            </div>
+        </div>
+        <button 
+            pButton 
+            type = "submit" 
+            label = "Add" 
+            icon = "pi pi-check" 
+            iconPos = "right" 
+            (click) = "submitCreateForm(); displayModal = false" *ngIf = "!product.productId" 
+            [disabled] = !productAddForm.valid>
+        </button>
     </p-dialog>
 </form>
 
-<form>
-    <p-dialog header = "Update product" *ngIf = "product.productId" [(visible)] = "displayModal" [modal] = "true" [style] = "{width: '15vw'}" [draggable] = "false" [resizable] = "false">
-        <div *ngIf = "product">   
-            <div>
-                <label for = "name" class="form-label">Name:</label>
-                <input pInputText [formControl] = "name" type = "text" required minlength = "3"/>
-                <div *ngIf = "name.invalid && (name.dirty || name.touched)" class = "alert">
-                    <div *ngIf = "name.errors?.['required']">
-                        <span style = "color: red;">Name is required.</span>
-                    </div>
-                    <div *ngIf = "name.errors?.['minlength']">
-                        <span style = "color: red;">Name must have at least 3 characters.</span>
-                    </div>
+<!--EDIT product form-->
+<form [formGroup] = "productEditForm" (submit) = "submitEditForm()">
+    <p-dialog 
+        *ngIf = "product.productId" 
+        header = "Update product"
+        [(visible)] = "displayModal" 
+        [style] = "{width: '20vw'}" 
+        [modal] = "true"
+        [draggable] = "false" 
+        [resizable] = "false">
+        <div>
+            <label for = "name" class="form-label">
+                Name:
+            </label>
+            <br>
+            <input 
+                pInputText 
+                id = "name" 
+                type = "text"
+                class = "form-control"
+                formControlName = "name" 
+                placeholder = "Ex. Stove"
+                minlength = "3"
+                required/>
+            <div *ngIf = "productEditForm.controls['name'].invalid && (productEditForm.controls['name'].dirty || productEditForm.controls['name'].touched)" class = "alert">
+                <div *ngIf = "productEditForm.controls['name'].errors?.['required']">
+                    <span style = "color: red;">Name is required.</span>
+                </div>
+                <div *ngIf = "productEditForm.controls['name'].errors?.['minlength']">
+                    <span style = "color: red;">Name must have at least 3 characters.</span>
                 </div>
             </div>
-            <div>
-                <label for = "price" class="form-label">Price:</label>
-                <input pInputText [formControl] = "price" type = "text" class="form-control" required minlength = "1"/>
-                <div *ngIf = "price.invalid && (price.dirty || price.touched)" class = "invalid-feedback">
-                    <div *ngIf = "price.errors?.['required']">
-                        <span style = "color: red;">Price is required.</span>
-                    </div>
-                    <div *ngIf = "price.errors?.['minlength']">
-                        <span style = "color: red;">Price must have at least 1 character.</span>
-                    </div>
+        </div>
+        <div>
+            <label for = "price" class="form-label">
+                Price:
+            </label>
+            <br>
+            <input 
+                pInputText 
+                type = "text"
+                id = "price" 
+                class = "form-control"
+                formControlName = "price"
+                placeholder = "$USD"   
+                minlength = "1"
+                required/>
+            <div *ngIf = "productEditForm.controls['price'].invalid && (productEditForm.controls['price'].dirty || productEditForm.controls['price'].touched)" class = "invalid-feedback">
+                <div *ngIf = "productEditForm.controls['price'].errors?.['required']">
+                    <span style = "color: red;">Price is required.</span>
+                </div>
+                <div *ngIf = "productEditForm.controls['price'].errors?.['minlength']">
+                    <span style = "color: red;">Price must have at least 1 character.</span>
                 </div>
             </div>
-            <div>
-                <label for = "country" class="form-label">Country:</label>
-                <input pInputText [formControl] = "country" type = "text" class="form-control" required minlength = "3"/>
-                <div *ngIf = "country.invalid && (country.dirty || country.touched)" class = "invalid-feedback">
-                    <div *ngIf = "country.errors?.['required']">
-                        <span style = "color: red;">Country is required.</span>
-                    </div>
-                    <div *ngIf = "country.errors?.['minlength']">
-                        <span style = "color: red;">Country must have at least 3 characters.</span>
-                    </div>
+        </div>
+        <div>
+            <label for = "country" class="form-label">
+                Country:
+            </label>
+            <br>
+            <input 
+                pInputText 
+                type = "text" 
+                id = "country"
+                class = "form-control" 
+                formControlName = "country"
+                placeholder = "Ex. CROATIA"
+                minlength = "3"
+                required/>
+            <div *ngIf = "productEditForm.controls['country'].invalid && (productEditForm.controls['country'].dirty || productEditForm.controls['country'].touched)" class = "invalid-feedback">
+                <div *ngIf = "productEditForm.controls['country'].errors?.['required']">
+                    <span style = "color: red;">Country is required.</span>
+                </div>
+                <div *ngIf = "productEditForm.controls['country'].errors?.['minlength']">
+                    <span style = "color: red;">Country must have at least 3 characters.</span>
                 </div>
             </div>
-            <div>
-                <label for = "type" class="form-label">Type:</label>
-                <input pInputText [formControl] = "type" type = "text" required minlength = "3"/>
-                <div *ngIf = "type.invalid && (type.dirty || type.touched)" class = "invalid-feedback">
-                    <div *ngIf = "type.errors?.['required']">
-                        <span style = "color: red;">Type is required.</span>
-                    </div>
-                    <div *ngIf = "type.errors?.['minlength']">
-                        <span style = "color: red;">Type must have at least 3 characters.</span>
-                    </div>
+        </div>
+        <div>
+            <label for = "type" class="form-label">
+                Type:
+            </label>
+            <br>
+            <input 
+                pInputText
+                type = "text"  
+                id = "type" 
+                class = "form-control"
+                formControlName = "type"
+                placeholder = "Ex. Kitchen Appliances"   
+                minlength = "3"
+                required/>
+            <div *ngIf = "productEditForm.controls['type'].invalid && (productEditForm.controls['type'].dirty || productEditForm.controls['type'].touched)" class = "invalid-feedback">
+                <div *ngIf = "productEditForm.controls['type'].errors?.['required']">
+                    <span style = "color: red;">Type is required.</span>
+                </div>
+                <div *ngIf = "productEditForm.controls['type'].errors?.['minlength']">
+                    <span style = "color: red;">Type must have at least 3 characters.</span>
                 </div>
             </div>
-            <button pButton type = "submit" label = "Update" icon = "pi pi-check" iconPos = "right" (click) = "updateProduct(product); displayModal = false;" *ngIf = "product.productId"></button>
+            <button 
+                pButton 
+                type = "submit" 
+                label = "Update" 
+                icon = "pi pi-check" 
+                iconPos = "right" 
+                (click) = "submitEditForm(); displayModal = false;" *ngIf = "product.productId" 
+                [disabled] = "!productEditForm.valid">
+            </button>
         </div>
     </p-dialog>
 </form>

@@ -46,5 +46,6 @@ export class ProductsListComponent implements OnInit {
   initUpdatedProduct(id: number, product: Product){
     this.currentProductId = id;
     this.productToEdit = product;
+    console.log(this.currentProductId);
   }
 }

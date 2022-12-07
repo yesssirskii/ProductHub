@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ProductService } from '../../Services/product.service';
 import { ConfirmationService } from 'primeng/api';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Product } from 'src/app/Models/product';
 
 @Component({
@@ -12,6 +12,9 @@ import { Product } from 'src/app/Models/product';
 })
 export class ProductsAddEditComponent implements OnInit {
 
+  productAddForm: FormGroup;
+  productEditForm: FormGroup;
+
   @Input() product: Product;
   @Input() currentProductId: number;
   @Input() displayModal: boolean = false;
@@ -19,20 +22,77 @@ export class ProductsAddEditComponent implements OnInit {
 
   constructor(private service: ProductService) {}
 
-  ngOnInit(): void {}
-
-  name: FormControl = new FormControl('', [Validators.required, Validators.minLength(3)]);
-  price: FormControl = new FormControl('', [Validators.required]);
-  country: FormControl = new FormControl('', [Validators.required, Validators.minLength(3)]);
-  type: FormControl = new FormControl('', [Validators.required, Validators.minLength(3)]);
-  
-  createProduct(product: Product){
-    this.service.addProduct(product).subscribe((products: Product[]) => this.updatedProduct.emit(products));
+  ngOnInit(): void {
+    this.setCreateForm();
+    this.setEditForm();
   }
 
-  updateProduct(product: Product){
-    this.currentProductId = product.productId; // the line which was missing to get the product ID
-    this.service.updateProduct(this.currentProductId, product).subscribe((products: Product[]) => this.updatedProduct.emit(products));
+  setEditForm(){
+
+    console.log(this.product)
+    this.productEditForm = new FormGroup({
+      name: new FormControl(this.product?.name,[
+        Validators.required,
+        Validators.minLength(3),
+      ]),
+      price: new FormControl(this.product?.price,[
+        Validators.required,
+      ]),
+      country: new FormControl(this.product?.country,[
+        Validators.required,
+        Validators.minLength(3),
+      ]),
+      type: new FormControl(this.product?.type,[
+        Validators.required,
+        Validators.minLength(3),
+      ]),
+    })
   }
+
+  setCreateForm(){
+    this.productAddForm = new FormGroup({
+    name: new FormControl('',[
+      Validators.required,
+      Validators.minLength(3),
+    ]),
+    price: new FormControl('',[
+      Validators.required,
+    ]),
+    country: new FormControl('',[
+      Validators.required,
+      Validators.minLength(3),
+    ]),
+    type: new FormControl('',[
+      Validators.required,
+      Validators.minLength(3),
+    ]),
+  })
+  }
+
+  submitCreateForm(): void{
+    if(!this.productAddForm.valid){
+      return;
+    }
+    this.service
+      .addProduct(this.productAddForm.value)
+      .subscribe(
+        (products: Product[]) => this.updatedProduct.emit(products)
+      );
+      console.log(this.productAddForm.value);
+  }
+
+  submitEditForm(): void{
+    if(!this.productEditForm.valid){
+      return;
+    }
+    this.currentProductId = this.product?.productId;
+    this.service
+      .updateProduct(this.currentProductId, this.productEditForm.value)
+      .subscribe(
+        (products: Product[]) => this.updatedProduct.emit(products)
+      );
+  }
+
+
 }
 
