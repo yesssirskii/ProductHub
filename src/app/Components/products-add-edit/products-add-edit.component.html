@@ -4,7 +4,7 @@
         *ngIf = "!product.productId"
         header = "Add product"  
         [(visible)] = "displayModal" 
-        [style] = "{width: '20vw'}" 
+        [style] = "{width: '15vw'}" 
         [modal] = "true" 
         [draggable] = "false" 
         [resizable] = "false">
@@ -96,6 +96,7 @@
                 </div>
             </div>
         </div>
+        <br>
         <button 
             pButton 
             type = "submit" 
@@ -109,12 +110,12 @@
 </form>
 
 <!--EDIT product form-->
-<form [formGroup] = "productEditForm" (submit) = "submitEditForm()">
+<form [formGroup] = "productEditForm">
     <p-dialog 
         *ngIf = "product.productId" 
         header = "Update product"
         [(visible)] = "displayModal" 
-        [style] = "{width: '20vw'}" 
+        [style] = "{width: '15vw'}" 
         [modal] = "true"
         [draggable] = "false" 
         [resizable] = "false">
@@ -132,6 +133,7 @@
                 placeholder = "Ex. Stove"
                 minlength = "3"
                 required/>
+                {{ this.product.name }}
             <div *ngIf = "productEditForm.controls['name'].invalid && (productEditForm.controls['name'].dirty || productEditForm.controls['name'].touched)" class = "alert">
                 <div *ngIf = "productEditForm.controls['name'].errors?.['required']">
                     <span style = "color: red;">Name is required.</span>
@@ -209,6 +211,8 @@
                     <span style = "color: red;">Type must have at least 3 characters.</span>
                 </div>
             </div>
+            <br>
+            <br>
             <button 
                 pButton 
                 type = "submit" 

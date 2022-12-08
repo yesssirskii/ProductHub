@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { ProductService } from '../../Services/product.service';
 import { Product } from 'src/app/Models/product';
 
@@ -46,6 +46,6 @@ export class ProductsListComponent implements OnInit {
   initUpdatedProduct(id: number, product: Product){
     this.currentProductId = id;
     this.productToEdit = product;
-    console.log(this.currentProductId);
+    console.log(this.currentProductId, product);
   }
 }

@@ -28,8 +28,6 @@ export class ProductsAddEditComponent implements OnInit {
   }
 
   setEditForm(){
-
-    console.log(this.product)
     this.productEditForm = new FormGroup({
       name: new FormControl(this.product?.name,[
         Validators.required,
@@ -67,6 +65,7 @@ export class ProductsAddEditComponent implements OnInit {
       Validators.minLength(3),
     ]),
   })
+  console.log(this.productAddForm.value);
   }
 
   submitCreateForm(): void{
