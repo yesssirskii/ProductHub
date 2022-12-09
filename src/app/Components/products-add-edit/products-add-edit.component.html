@@ -62,14 +62,14 @@
                 class = "form-control"
                 formControlName = "country" 
                 placeholder = "Ex. CROATIA" 
-                minlength = "3"
+                minlength = "2"
                 required/>
             <div *ngIf = "productAddForm.controls['country'].invalid && (productAddForm.controls['country'].dirty || productAddForm.controls['country'].touched)" class = "invalid-feedback">
                 <div *ngIf = "productAddForm.controls['country'].errors?.['required']">
                     <span style = "color: red;">Country is required.</span>
                 </div>
                 <div *ngIf = "productAddForm.controls['country'].errors?.['minlength']">
-                    <span style = "color: red;">Country must have at least 3 characters.</span>
+                    <span style = "color: red;">Country must have at least 2 characters.</span>
                 </div>
             </div>
         </div>
@@ -177,14 +177,14 @@
                 class = "form-control" 
                 formControlName = "country"
                 placeholder = "Ex. CROATIA"
-                minlength = "3"
+                minlength = "2"
                 required/>
             <div *ngIf = "productEditForm.controls['country'].invalid && (productEditForm.controls['country'].dirty || productEditForm.controls['country'].touched)" class = "invalid-feedback">
                 <div *ngIf = "productEditForm.controls['country'].errors?.['required']">
                     <span style = "color: red;">Country is required.</span>
                 </div>
                 <div *ngIf = "productEditForm.controls['country'].errors?.['minlength']">
-                    <span style = "color: red;">Country must have at least 3 characters.</span>
+                    <span style = "color: red;">Country must have at least 2 characters.</span>
                 </div>
             </div>
         </div>
