@@ -133,7 +133,6 @@
                 placeholder = "Ex. Stove"
                 minlength = "3"
                 required/>
-                {{ this.product.name }}
             <div *ngIf = "productEditForm.controls['name'].invalid && (productEditForm.controls['name'].dirty || productEditForm.controls['name'].touched)" class = "alert">
                 <div *ngIf = "productEditForm.controls['name'].errors?.['required']">
                     <span style = "color: red;">Name is required.</span>
@@ -225,4 +224,3 @@
         </div>
     </p-dialog>
 </form>
-

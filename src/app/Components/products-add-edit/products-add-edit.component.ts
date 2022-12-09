@@ -1,51 +1,30 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ProductService } from '../../Services/product.service';
-import { ConfirmationService } from 'primeng/api';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Product } from 'src/app/Models/product';
 
 @Component({
   selector: 'app-products-add-edit',
   templateUrl: './products-add-edit.component.html',
   styleUrls: ['./products-add-edit.component.css'],
-  providers: [ConfirmationService]
 })
 export class ProductsAddEditComponent implements OnInit {
 
   productAddForm: FormGroup;
-  productEditForm: FormGroup;
 
   @Input() product: Product;
   @Input() currentProductId: number;
   @Input() displayModal: boolean = false;
   @Output() updatedProduct = new EventEmitter<Product[]>();
 
-  constructor(private service: ProductService) {}
+  @Input() productEditForm: FormGroup; 
+
+  constructor(private service: ProductService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.setCreateForm();
-    this.setEditForm();
   }
 
-  setEditForm(){
-    this.productEditForm = new FormGroup({
-      name: new FormControl(this.product?.name,[
-        Validators.required,
-        Validators.minLength(3),
-      ]),
-      price: new FormControl(this.product?.price,[
-        Validators.required,
-      ]),
-      country: new FormControl(this.product?.country,[
-        Validators.required,
-        Validators.minLength(3),
-      ]),
-      type: new FormControl(this.product?.type,[
-        Validators.required,
-        Validators.minLength(3),
-      ]),
-    })
-  }
 
   setCreateForm(){
     this.productAddForm = new FormGroup({
@@ -90,8 +69,7 @@ export class ProductsAddEditComponent implements OnInit {
       .subscribe(
         (products: Product[]) => this.updatedProduct.emit(products)
       );
+      console.log(this.productEditForm.value);
   }
-
-
 }
 
