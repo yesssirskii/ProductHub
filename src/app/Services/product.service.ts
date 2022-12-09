@@ -11,7 +11,6 @@ export class ProductService {
   
   constructor(private http: HttpClient) {}
 
-  // Declaring variable 'api' which grabs the 'apiUrl' variable from the 'environment.ts' file:
   private api = environment.apiUrl;
 
   private url = 'api/Products';
