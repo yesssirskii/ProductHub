@@ -44,6 +44,7 @@ namespace ProductsAPI.Services
       dbProduct.Name = updateProductDto.Name;
       dbProduct.Price = updateProductDto.Price;
       dbProduct.Country = updateProductDto.Country;
+      dbProduct.Type = updateProductDto.Type;
 
       _context.Products.Update(_mapper.Map<Product>(dbProduct));
       _context.SaveChanges();
