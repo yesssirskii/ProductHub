@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "KszUybSI6NF9oKgu4LOZ4WwHRsCaFhfdxicsIP2n19TmZdty01x/pp6rdroN0gXUvfKo47yfj04iuLz0ty3shA==",
+  "dgSpecHash": "Z8+vqziTirPSUZPGna1O9e7AVKutklcSlijQUHE+7LtEhS8FdFvVn6AO0elo4n+A2PPRZ22YMlvQ+gBS3FwQcg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ivanm\\Source\\Repos\\yesssirskii\\Angular_workshop\\ProductsAPI\\ProductsAPI\\ProductsAPI.csproj",
+  "projectFilePath": "C:\\Users\\ivanm\\Documents\\Side projects\\Angular_workshop\\ProductsAPI\\ProductsAPI\\ProductsAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ivanm\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\ivanm\\.nuget\\packages\\automapper.ef6\\2.1.1\\automapper.ef6.2.1.1.nupkg.sha512",
