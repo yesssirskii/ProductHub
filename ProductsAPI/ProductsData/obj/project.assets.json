@@ -4082,19 +4082,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ivan.matejcic\\.nuget\\packages\\": {}
+    "C:\\Users\\ivanm\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ivan.matejcic\\source\\repos\\IvanMatejcic\\Angular_workshop\\ProductsAPI\\ProductsData\\ProductsData.csproj",
+      "projectUniqueName": "C:\\Users\\ivanm\\Source\\Repos\\yesssirskii\\Angular_workshop\\ProductsAPI\\ProductsData\\ProductsData.csproj",
       "projectName": "ProductsData",
-      "projectPath": "C:\\Users\\ivan.matejcic\\source\\repos\\IvanMatejcic\\Angular_workshop\\ProductsAPI\\ProductsData\\ProductsData.csproj",
-      "packagesPath": "C:\\Users\\ivan.matejcic\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ivan.matejcic\\Source\\Repos\\IvanMatejcic\\Angular_workshop\\ProductsAPI\\ProductsData\\obj\\",
+      "projectPath": "C:\\Users\\ivanm\\Source\\Repos\\yesssirskii\\Angular_workshop\\ProductsAPI\\ProductsData\\ProductsData.csproj",
+      "packagesPath": "C:\\Users\\ivanm\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ivanm\\Source\\Repos\\yesssirskii\\Angular_workshop\\ProductsAPI\\ProductsData\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\ivan.matejcic\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ivanm\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4102,6 +4107,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
