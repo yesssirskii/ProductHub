@@ -4090,9 +4090,9 @@
     "restore": {
       "projectUniqueName": "C:\\Users\\ivanm\\Documents\\Side projects\\Angular_workshop\\ProductsAPI\\ProductsData\\ProductsData.csproj",
       "projectName": "ProductsData",
-      "projectPath": "C:\\Users\\ivanm\\Documents\\Side projects\\Angular_workshop\\ProductsAPI\\ProductsData\\ProductsData.csproj",
-      "packagesPath": "C:\\Users\\ivanm\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ivanm\\Documents\\Side projects\\Angular_workshop\\ProductsAPI\\ProductsData\\obj\\",
+      "projectPath": "C:\\Users\\ivan.matejcic\\source\\repos\\IvanMatejcic\\Angular_workshop\\ProductsAPI\\ProductsData\\ProductsData.csproj",
+      "packagesPath": "C:\\Users\\ivan.matejcic\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ivan.matejcic\\Source\\Repos\\IvanMatejcic\\Angular_workshop\\ProductsAPI\\ProductsData\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
