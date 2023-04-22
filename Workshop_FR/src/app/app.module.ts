@@ -15,6 +15,11 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ProductsAddEditComponent } from './Components/products-add-edit/products-add-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CardModule } from 'primeng/card';
+import { TooltipModule } from 'primeng/tooltip';
+import { ConfirmationService } from 'primeng/api';
+import { MessagesModule } from 'primeng/messages';
+import { Toast, ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -35,8 +40,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     ConfirmPopupModule,
     ConfirmDialogModule,
     ReactiveFormsModule,
+    CardModule,
+    TooltipModule,
+    MessagesModule,
+    ToastModule
   ],
-  providers: [ProductService],
+  providers: [ProductService, ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

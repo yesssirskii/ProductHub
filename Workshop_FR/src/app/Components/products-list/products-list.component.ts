@@ -2,42 +2,52 @@ import { Component, Input, Output,  OnInit, EventEmitter } from '@angular/core';
 import { ProductService } from '../../Services/product.service';
 import { Product } from 'src/app/Models/product';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-
-
+import { ConfirmationService, MessageService } from 'primeng/api';
 @Component({
   selector: 'app-products-list',
   templateUrl: './products-list.component.html',
-  styleUrls: ['./products-list.component.css']
+  styleUrls: ['./products-list.component.css'],
+  providers: [ConfirmationService, MessageService]
 })
 export class ProductsListComponent implements OnInit {
 
   products: Product[] = [];
   productToEdit: Product; 
   currentProductId: number;
-  displayModal: boolean = false;
+  
+  addDialogVisible: boolean;
+  editDialogVisible: boolean;
+  deleteDialogVisible: boolean;
 
   productEditForm: FormGroup;
   productAddForm: FormGroup;
 
-  constructor(private service: ProductService, private fb: FormBuilder) {}
+  constructor(
+    private productService: ProductService,
+    private fb: FormBuilder,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService) {}
 
   ngOnInit(): void {
     this.getProducts();
   }
   
   getProducts(){
-    this.service.getProducts().subscribe((response: Product[]) =>
+    this.productService.getProducts().subscribe((response: Product[]) =>
       (this.products = response));
   }
 
   deleteProduct(id: number){
-    if(confirm("Are you sure you want to delete this product?")){
-      this.service.deleteProduct(id).subscribe(response => {
-        alert("Product deleted successfully.")
-        this.getProducts();
-      })
-    }
-  }
+    this.confirmationService.confirm({
+      accept: () => {
+        this.productService.deleteProduct(id).subscribe(response => {this.getProducts()});
+        this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
+      },
+      reject: () => {
+        this.messageService.add({ severity: 'warn', summary: 'Cancelled', detail: 'You have cancelled' });
+      }
+  });
+}
 
   updateProductList(products: Product[]){
     this.products = products;
@@ -64,10 +74,12 @@ export class ProductsListComponent implements OnInit {
         Validators.minLength(3),
       ]),
     })
+    this.addDialogVisible = true;
   }
   
   // Function to initialize product to update:
   initUpdatedProduct(id: number, product: Product){
+    this.editDialogVisible = true;
     this.currentProductId = id;
     this.productToEdit = product;
 

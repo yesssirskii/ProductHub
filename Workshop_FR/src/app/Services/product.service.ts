@@ -11,24 +11,21 @@ export class ProductService {
   
   constructor(private http: HttpClient) {}
 
-  private api = environment.apiUrl;
-
-  private url = 'api/Products';
-  private putDeleteURL = this.api + 'api/Products/';
+  private apiURL = environment.apiUrl + 'api/Products/';
 
   public getProducts(): Observable<Product[]>{
-    return this.http.get<Product[]>(this.api + this.url);
+    return this.http.get<Product[]>(this.apiURL);
   }
 
   public addProduct(product: Product): Observable<Product[]>{
-    return this.http.post<Product[]>(this.api + this.url, product);
+    return this.http.post<Product[]>(this.apiURL, product);
   }
 
   public updateProduct(id: number, product: Product): Observable<Product[]>{
-    return this.http.put<Product[]>(this.putDeleteURL + id, product);
+    return this.http.put<Product[]>(this.apiURL + id, product);
   }
 
   public deleteProduct(id: number): Observable<Product[]>{
-    return this.http.delete<Product[]>(this.putDeleteURL + id);
+    return this.http.delete<Product[]>(this.apiURL + id);
   }
 }

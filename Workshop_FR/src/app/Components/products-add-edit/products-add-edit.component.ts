@@ -12,14 +12,17 @@ export class ProductsAddEditComponent implements OnInit {
   @Input() product: Product;
   @Input() currentProductId: number;
 
-  @Input() displayModal: boolean = false;
+  @Input() addDialogVisible: boolean;
+  @Input() editDialogVisible: boolean;
 
   @Input() productEditForm: FormGroup; 
   @Input() productAddForm: FormGroup;
 
   @Output() updatedProduct = new EventEmitter<Product[]>();
 
-  constructor(private service: ProductService, private fb: FormBuilder) {}
+  constructor(
+    private service: ProductService,
+    private fb: FormBuilder){}
 
   ngOnInit(): void {}
 

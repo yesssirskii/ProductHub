@@ -1,26 +1,74 @@
 <h1>Product workshop</h1>
-<p-button pRipple class = "p-button-raised" (click) = "initNewProduct(); displayModal = !displayModal"><i class="pi pi-plus"></i></p-button>
-<h2>Products</h2>
-<p-table [value] = "products">
-    <ng-template pTemplate="header">
-        <tr>
-            <th pSortableColumn="name">NAME<p-sortIcon field="name"></p-sortIcon></th>
-            <th pSortableColumn="price">PRICE<p-sortIcon field="price"></p-sortIcon></th>
-            <th pSortableColumn="country">COUNTRY<p-sortIcon field="country"></p-sortIcon></th>
-            <th pSortableColumn="type">TYPE<p-sortIcon field="type"></p-sortIcon></th>
-            <th>OPTIONS</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-product>
-        <tr>
-            <td>{{ product.name }}</td>
-            <td>{{ product.price | currency: 'USD'}}</td>
-            <td>{{ product.country }}</td>
-            <td>{{ product.type }}</td>
-            <td><button pButton pRipple class = "p-button-raised" (click) = "initUpdatedProduct(product.productId, product); displayModal = !displayModal"><i class="pi pi-file-edit"></i></button>
-                <button pButton pRipple class="p-button-danger p-button-raised" (click) = "deleteProduct(product.productId)"><i class="pi pi-trash"></i></button>
-            </td>
-        </tr>
-    </ng-template>
-</p-table>
-<app-products-add-edit [productEditForm] = "productEditForm" [productAddForm] = "productAddForm" [product] = "productToEdit" (updatedProduct) = "updateProductList($event)" [currentProductId] = "currentProductId" [displayModal] = "displayModal" ></app-products-add-edit>
+<p-button 
+    pRipple 
+    class = "p-button-raised"
+    icon = "pi pi-plus"
+    label = "Add product" 
+    pTooltip = "Add a product"
+    (click) = "initNewProduct()"
+    >
+</p-button>
+
+<div style = "display: flex; align-items: center; justify-content: center;">
+    <p-card [style]="{ width: '700px' }">
+        <h2 style = "justify-content: left;">Products</h2>
+        <p-table [value] = "products">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th></th>
+                    <th pSortableColumn="name">NAME<p-sortIcon field="name"></p-sortIcon></th>
+                    <th pSortableColumn="price">PRICE<p-sortIcon field="price"></p-sortIcon></th>
+                    <th pSortableColumn="country">COUNTRY<p-sortIcon field="country"></p-sortIcon></th>
+                    <th pSortableColumn="type">TYPE<p-sortIcon field="type"></p-sortIcon></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product>
+                <tr>
+                    <td>
+                        <button
+                            pButton 
+                            pRipple 
+                            class = "p-button-raised" 
+                            icon = "pi pi-file-edit"
+                            pTooltip = "Edit product"
+                            (click) = "initUpdatedProduct(product.productId, product)"
+                            >
+                        </button>
+                        <p-toast></p-toast>
+                        <p-confirmDialog
+                            id = "deleteProductDialog"
+                            message = 'Are you sure you want to delete this product?'
+                            header = 'Delete product'
+                            icon = 'pi pi-exclamation-triangle'
+                        >
+                        </p-confirmDialog>
+                        <button 
+                            pButton 
+                            pRipple
+                            icon = "pi pi-trash" 
+                            pTooltip = "Delete product"
+                            class="p-button-danger p-button-raised" 
+                            (click) = "deleteProduct(product.productId)"
+                            >
+                        </button>
+                    </td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.price | currency: 'USD'}}</td>
+                    <td>{{ product.country }}</td>
+                    <td>{{ product.type }}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </p-card>
+</div>
+    
+<app-products-add-edit 
+    [productEditForm] = "productEditForm" 
+    [productAddForm] = "productAddForm" 
+    [product] = "productToEdit" 
+    (updatedProduct) = "updateProductList($event)" 
+    [currentProductId] = "currentProductId" 
+    [addDialogVisible]="addDialogVisible"
+    [editDialogVisible]="editDialogVisible"
+    >
+</app-products-add-edit>
